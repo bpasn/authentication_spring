@@ -1,6 +1,5 @@
 package com.spirngauth.authentication_spring.payload.response;
 
-import com.spirngauth.authentication_spring.models.ERole;
 import java.util.List;
 public class JwtResponse {
     private String token;

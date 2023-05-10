@@ -1,7 +1,5 @@
 package com.spirngauth.authentication_spring.security.services;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +14,6 @@ import com.spirngauth.authentication_spring.models.UserModel;
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = LoggerFactory.getLogger(UserDetailsImpl.class);
     private String id;
 
     private String username;
@@ -41,7 +38,6 @@ public class UserDetailsImpl implements UserDetails {
         List<GrantedAuthority> authorities = user.getUserRole().stream().map(role -> new SimpleGrantedAuthority(
                 role.getName().name())).collect(
                         Collectors.toList());
-                        logger.info("ROLE IS {}",authorities.get(0).toString());
         return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(),
                 authorities);
     }

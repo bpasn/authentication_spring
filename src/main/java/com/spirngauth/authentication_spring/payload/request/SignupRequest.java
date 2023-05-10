@@ -1,12 +1,16 @@
 package com.spirngauth.authentication_spring.payload.request;
 
 import java.util.List;
-import java.util.Set;
 
 public class SignupRequest {
     private String username;
     private String email;
     private String password;
+    private String firstName;
+    private String lastName;
+    private String telephone;
+    
+
     private List<String> role;
     
 
@@ -42,6 +46,30 @@ public class SignupRequest {
 
     public void setRole(List<String> role) {
         this.role = role;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     

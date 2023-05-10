@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spirngauth.authentication_spring.models.ERole;
@@ -58,7 +57,8 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        logger.info("\nLOGIN REQUEST \nusername: {}\npassword:{}",loginRequest.getUsername(),loginRequest.getPassword());
+        logger.info("\nLOGIN REQUEST \nusername: {}\npassword:{}", loginRequest.getUsername(),
+                loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         logger.info("\nSTEP 1 Create Token");
@@ -74,7 +74,8 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
         logger.info("\nSTEP 5 getRole");
-        return ResponseEntity.ok(new JwtResponse(jwt,userDetails.getId(),userDetails.getUsername(),userDetails.getEmail(),roles));
+        return ResponseEntity.ok(
+                new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
 
     @PostMapping("/signup")
@@ -89,10 +90,12 @@ public class AuthController {
         }
 
         // Create new User's account
-
         UserModel user = new UserModel(
                 signupRequest.getUsername(),
                 signupRequest.getEmail(),
+                signupRequest.getFirstName(),
+                signupRequest.getLastName(),
+                signupRequest.getTelephone(),
                 encoder.encode(signupRequest.getPassword()));
 
         List<String> strRoles = signupRequest.getRole();
@@ -123,12 +126,10 @@ public class AuthController {
                         roles.add(userRole);
                 }
             });
-
-            user.setUserRole(roles);
-            userRepository.save(user);
         }
+        user.setUserRole(roles);
+        userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registerd successfully!"));
-
 
     }
 
