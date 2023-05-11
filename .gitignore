@@ -13,7 +13,7 @@ docker/db/*
 .settings
 .springBeans
 .sts4-cache
-
+./docker/db
 ### IntelliJ IDEA ###
 .idea
 *.iws
