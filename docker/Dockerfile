@@ -1,12 +1,8 @@
-FROM mysql:latest
+FROM postgres:latest
 
-ENV MYSQL_DATABASE=spring_db
-ENV MYSQL_ROOT_USER=root
-ENV MYSQL_ROOT_PASSWORD=1234
-ENV MYSQL_USER=spring_user
-ENV MYSQL_PASSWORD=P@ssw0rd
+ENV POSTGRES_USER=spring_user
+ENV POSTGRES_PASSWORD=spring_pwd
+ENV POSTGRES_DB=spring_db
 
-VOLUME spring_db
+EXPOSE 5432
 
-
-EXPOSE 3306

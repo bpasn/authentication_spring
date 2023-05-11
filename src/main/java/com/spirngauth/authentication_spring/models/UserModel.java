@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -27,28 +28,28 @@ public class UserModel {
 
     @NotBlank
     @Size(max = 20)
-    @Column(length = 20)
+    // @Column(length = 20)
     private String username;
 
     @NotBlank
     @Size(max = 50)
     @Email
-    @Column(length = 20)
+    // @Column(length = 20)
     private String email;
 
     @NotBlank
     @Size(max = 120)
-    @Column(length = 120)
+    // @Column(length = 120)
     private String password;
 
     @NotBlank
     @Size(max = 50)
-    @Column(length = 20)
+    // @Column(length = 20)
     private String firstName;
 
     @NotBlank
     @Size(max = 50)
-    @Column(length = 20)
+    // @Column(length = 20)
     private String lastName;
 
 
@@ -57,12 +58,12 @@ public class UserModel {
     private String telephone;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "roles", 
-				joinColumns = @JoinColumn(name = "user_id"), 
-				inverseJoinColumns = @JoinColumn(name = "role_id"))
+    // @ManyToMany(fetch = FetchType.LAZY)
+	// @JoinTable(	name = "roles", 
+	// 			joinColumns = @JoinColumn(name = "user_id"), 
+	// 			inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @DBRef
 	private Set<RoleModel> roles = new HashSet<>();
-
     
 
 
