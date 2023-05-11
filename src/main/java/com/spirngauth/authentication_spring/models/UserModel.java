@@ -7,11 +7,8 @@ import java.util.Set;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-<<<<<<< HEAD
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-=======
->>>>>>> 372c90f (not perfect)
 
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
@@ -25,122 +22,19 @@ public class UserModel {
 
     @NotBlank
     @Size(max = 20)
-<<<<<<< HEAD
-=======
-    // @Column(length = 20)
->>>>>>> 372c90f (not perfect)
     private String username;
 
     @NotBlank
     @Size(max = 50)
     @Email
-<<<<<<< HEAD
     private String email;
 
     private String firstName;
 
-=======
-    // @Column(length = 20)
-    private String email;
-
-    @NotBlank
-    @Size(max = 120)
-    // @Column(length = 120)
-    private String password;
-
-    @NotBlank
-    @Size(max = 50)
-    // @Column(length = 20)
-    private String firstName;
-
-    @NotBlank
-    @Size(max = 50)
-    // @Column(length = 20)
->>>>>>> 372c90f (not perfect)
     private String lastName;
 
     private String telephone;
 
-<<<<<<< HEAD
-=======
-
-    // @ManyToMany(fetch = FetchType.LAZY)
-	// @JoinTable(	name = "roles", 
-	// 			joinColumns = @JoinColumn(name = "user_id"), 
-	// 			inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @DBRef
-	private Set<RoleModel> roles = new HashSet<>();
-    
-
-
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt = new Date();
-
-    @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modifiedAt = new Date();;
-
-    private Date deletedAt;
-
-
-    
-
-    public UserModel() {
-
-    }
-    
-    
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", firstName=" + firstName +
-                '}';
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-    public String getUsername() {
-        return username;
-    }
-
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-    public String getPassword() {
-        return password;
-    }
-
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
->>>>>>> 372c90f (not perfect)
     public String getFirstName() {
         return firstName;
     }

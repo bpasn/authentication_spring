@@ -22,8 +22,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-<<<<<<< HEAD
-=======
 
 
 		<!-- Mysql -->
@@ -34,13 +32,10 @@
 		</dependency> -->
 
 		<!-- Mongodb -->
->>>>>>> 372c90f (not perfect)
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-<<<<<<< HEAD
-=======
 
 		<!-- PostGres -->
 		<!-- <dependency>
@@ -48,7 +43,6 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency> -->
->>>>>>> 372c90f (not perfect)
 
 
 		<dependency>
