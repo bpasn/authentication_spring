@@ -25,8 +25,15 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
+<<<<<<< HEAD
     public UserDetailsImpl(String id, String username, String email, String password,
             Collection<? extends GrantedAuthority> authorities) {
+=======
+   
+            
+           // Collection<? extends GrantedAuthority> authorities 
+    public UserDetailsImpl(Long id, String username, String email, String password,Collection<? extends GrantedAuthority> authorities ) {
+>>>>>>> 372c90f (not perfect)
         this.id = id;
         this.username = username;
         this.email = email;
@@ -35,11 +42,19 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(UserModel user) {
+<<<<<<< HEAD
         List<GrantedAuthority> authorities = user.getUserRole().stream().map(role -> new SimpleGrantedAuthority(
+=======
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(
+>>>>>>> 372c90f (not perfect)
                 role.getName().name())).collect(
                         Collectors.toList());
         return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(),
                 authorities);
+<<<<<<< HEAD
+=======
+        // return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword());
+>>>>>>> 372c90f (not perfect)
     }
 
     @Override
