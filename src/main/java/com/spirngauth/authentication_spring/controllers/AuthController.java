@@ -24,8 +24,8 @@ import com.spirngauth.authentication_spring.payload.request.LoginRequest;
 import com.spirngauth.authentication_spring.payload.request.SignupRequest;
 import com.spirngauth.authentication_spring.payload.response.JwtResponse;
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
-import com.spirngauth.authentication_spring.repository.RoleRepository;
-import com.spirngauth.authentication_spring.repository.UserRepository;
+import com.spirngauth.authentication_spring.repository.IRoleRepository;
+import com.spirngauth.authentication_spring.repository.IUserRepository;
 import com.spirngauth.authentication_spring.security.jwt.JwtUtils;
 import com.spirngauth.authentication_spring.security.services.UserDetailsImpl;
 
@@ -44,10 +44,10 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    IRoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -75,7 +75,7 @@ public class AuthController {
                 .collect(Collectors.toList());
         logger.info("\nSTEP 5 getRole");
         return ResponseEntity.ok(
-                new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+                new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail())); //
     }
 
     @PostMapping("/signup")
@@ -98,36 +98,37 @@ public class AuthController {
                 signupRequest.getTelephone(),
                 encoder.encode(signupRequest.getPassword()));
 
-        List<String> strRoles = signupRequest.getRole();
-        Set<RoleModel> roles = new HashSet<>();
+        // List<String> strRoles = signupRequest.getRole();
+        // Set<RoleModel> roles = new HashSet<>();
 
-        if (strRoles == null) {
-            RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        RoleModel adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-                        break;
-                    case "mod":
-                        RoleModel modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
+        // if (strRoles == null) {
+        //     RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
+        //             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        //     roles.add(userRole);
+        // } else {
+        //     strRoles.forEach(role -> {
+        //         switch (role) {
+        //             case "admin":
+        //                 RoleModel adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+        //                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        //                 roles.add(adminRole);
+        //                 break;
+        //             case "mod":
+        //                 RoleModel modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+        //                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        //                 roles.add(modRole);
 
-                        break;
+        //                 break;
 
-                    default:
-                        RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
-        user.setUserRole(roles);
+        //             default:
+        //                 RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
+        //                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        //                 roles.add(userRole);
+        //         }
+        //     });
+        // }
+        // user.setUserRole(roles);
+
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registerd successfully!"));
 

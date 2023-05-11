@@ -7,14 +7,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.spirngauth.authentication_spring.models.UserModel;
-import com.spirngauth.authentication_spring.repository.UserRepository;
+import com.spirngauth.authentication_spring.repository.IUserRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     @Override
     @Transactional

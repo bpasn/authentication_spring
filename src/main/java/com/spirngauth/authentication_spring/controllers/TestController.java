@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
-import com.spirngauth.authentication_spring.repository.UserRepository;
+import com.spirngauth.authentication_spring.repository.IUserRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     @GetMapping("/all")
     public ResponseEntity<?> allAccess() {
