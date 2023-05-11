@@ -2,6 +2,8 @@ package com.spirngauth.authentication_spring.models;
 
 public enum ECode {
     SUCCESS,
+    INTERNAL_ERROR,
+    DUPPLICATE,
     FAIL,
     UNKNOWN,
     NO_DATA,

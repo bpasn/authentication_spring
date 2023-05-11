@@ -150,4 +150,13 @@ public class UserModel {
         this.modifiedAt = modifiedAt;
     }
 
+    @Override
+    public String toString() {
+        return "UserModel [id=" + id + ", username=" + username + ", email=" + email + ", firstName=" + firstName
+                + ", lastName=" + lastName + ", telephone=" + telephone + ", password=" + password + ", userRole="
+                + userRole + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + "]";
+    }
+
+    
+
 }

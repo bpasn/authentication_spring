@@ -4,10 +4,20 @@ import com.spirngauth.authentication_spring.models.ECode;
 
 public class MessageResponse {
     private String message;
-    private ECode statusCode;
-    // private Boolean status;
+    private ECode status;
+    private Number code = 200;
     // private Object payload;
 
+
+    
+
+    public Number getCode() {
+        return code;
+    }
+
+    public void setCode(Number code) {
+        this.code = code;
+    }
 
     public MessageResponse() {
     }
@@ -15,9 +25,14 @@ public class MessageResponse {
     public MessageResponse(String message) {
         this.message = message;
     }
+    public MessageResponse(String message,ECode status,Number code) {
+        this.message = message;
+        this.status = status;
+        this.code = code;
+    }
     public MessageResponse(String message,ECode status) {
         this.message = message;
-        this.statusCode = status;
+        this.status = status;
     }
 
     // public MessageResponse(String message, ECode statusCode, Boolean status) {
@@ -33,11 +48,11 @@ public class MessageResponse {
 
 
     public ECode getStatusCode() {
-        return statusCode;
+        return status;
     }
 
     public void setStatusCode(ECode statusCode) {
-        this.statusCode = statusCode;
+        this.status = statusCode;
     }
 
     // public Boolean getStatus() {

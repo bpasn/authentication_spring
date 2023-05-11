@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spirngauth.authentication_spring.models.ECode;
-import com.spirngauth.authentication_spring.payload.request.product.ProductRequest;
+import com.spirngauth.authentication_spring.models.Product;
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
 
 import jakarta.validation.Valid;
@@ -25,17 +25,17 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductRequest request) throws Exception{
+    public ResponseEntity<?> createProduct(@RequestBody Product request) throws Exception{
         
         try {
-            
+            return ResponseEntity.ok(new MessageResponse(request.toString()));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(new MessageResponse(e.getMessage(), ECode.ERROR));
+            return ResponseEntity.status(500).body(new MessageResponse(e.getMessage(), ECode.INTERNAL_ERROR,500));
         }
-        return ResponseEntity.status(200).body(new MessageResponse(
-            "Create Product Successfully",
-            ECode.SUCCESS
-        ));
+        // return ResponseEntity.status(200).body(new MessageResponse(
+        //     "Create Product Successfully",
+        //     ECode.SUCCESS,200
+        // ));
     }
 
 }
