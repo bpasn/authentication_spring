@@ -57,11 +57,6 @@ public class UserModel {
     @Size(max = 20)
     private String telephone;
 
-
-    // @ManyToMany(fetch = FetchType.LAZY)
-	// @JoinTable(	name = "roles", 
-	// 			joinColumns = @JoinColumn(name = "user_id"), 
-	// 			inverseJoinColumns = @JoinColumn(name = "role_id"))
     @DBRef
 	private Set<RoleModel> roles = new HashSet<>();
     
