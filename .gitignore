@@ -32,5 +32,7 @@ build/
 
 ### VS Code ###
 .vscode/
-
+docker/db/
+docker/db
+docker/db/*
 .fake
