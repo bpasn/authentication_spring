@@ -1,17 +1,30 @@
 package com.spirngauth.authentication_spring;
 
-import java.util.List;
 
-import org.springframework.boot.CommandLineRunner;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.spirngauth.authentication_spring.models.ERole;
-import com.spirngauth.authentication_spring.models.RoleModel;
-import com.spirngauth.authentication_spring.repository.RoleRepository;
 
 @SpringBootApplication
+@OpenAPIDefinition(
+		info = @Info(
+				title = "Hello World",
+				version = "1.0.0",
+				description = "This project is only for leaning",
+				termsOfService = "runcodenow"
+				// contact = @Contact(
+				// 		name = "admin",
+				// 		email = "spring_root@email.com"
+				// ),
+				// license = @License(
+				// 		name = "licence",
+				// 		url = "runcodenow"
+				// )
+		)
+)
 public class AuthenticationSpringApplication {
 
 	public static void main(String[] args) {

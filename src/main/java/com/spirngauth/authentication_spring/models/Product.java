@@ -1,8 +1,6 @@
 package com.spirngauth.authentication_spring.models;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -23,15 +21,15 @@ public class Product {
     private String SKU; // ประเภทสินค้า
     
     @DBRef
-    private Set<ProductCategory> categoryId;
+    private ProductCategory category;
 
     @DBRef
-    private Set<ProductInventory> inventoryId;
+    private ProductInventory inventory;
 
-    private BigDecimal price;
+    private Double price;
 
     @DBRef
-    private Set<Discount> discountId;
+    private Discount discount;
 
     @Field("created_at")
     @CreatedDate
@@ -39,96 +37,87 @@ public class Product {
     @Field("modified_at")
     
     @LastModifiedDate
-    private Date modifiedAt;
+    private Date modifiedAt = new Date();
     @Field("deleted_at")
     private Date deletedAt;
-
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
     public String getDesc() {
         return desc;
     }
-
     public void setDesc(String desc) {
         this.desc = desc;
     }
-
     public String getSKU() {
         return SKU;
     }
-
     public void setSKU(String sKU) {
         SKU = sKU;
     }
-
-    public Set<ProductCategory> getCategoryId() {
-        return categoryId;
+    public ProductCategory getCategory() {
+        return category;
     }
-
-    public void setCategoryId(Set<ProductCategory> categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
-
-    public Set<ProductInventory> getInventoryId() {
-        return inventoryId;
+    public ProductInventory getInventory() {
+        return inventory;
     }
-
-    public void setInventoryId(Set<ProductInventory> inventoryId) {
-        this.inventoryId = inventoryId;
+    public void setInventory(ProductInventory inventory) {
+        this.inventory = inventory;
     }
-
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
-
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
-
-    public Set<Discount> getDiscountId() {
-        return discountId;
+    public Discount getDiscount() {
+        return discount;
     }
-
-    public void setDiscountId(Set<Discount> discountId) {
-        this.discountId = discountId;
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
     }
-
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
     public Date getModifiedAt() {
         return modifiedAt;
     }
-
     public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
     public Date getDeletedAt() {
         return deletedAt;
     }
-
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
     }
-
+    
     @Override
     public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", desc=" + desc + ", SKU=" + SKU + ", categoryId=" + categoryId
-                + ", inventoryId=" + inventoryId + ", price=" + price + ", discountId=" + discountId + ", createdAt="
+        return "Product [id=" + id + ", name=" + name + ", desc=" + desc + ", SKU=" + SKU + ", category=" + category
+                + ", inventory=" + inventory + ", price=" + price + ", discount=" + discount + ", createdAt="
                 + createdAt + ", modifiedAt=" + modifiedAt + ", deletedAt=" + deletedAt + "]";
     }
 
+    public Product() {
+    }
+
+    public Product(String name, String desc, String sKU, Double price) {
+        this.name = name;
+        this.desc = desc;
+        SKU = sKU;
+        this.price = price;
+    }
     
 
     

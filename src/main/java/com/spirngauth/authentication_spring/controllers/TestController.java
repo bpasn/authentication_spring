@@ -1,31 +1,33 @@
 package com.spirngauth.authentication_spring.controllers;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
 import com.spirngauth.authentication_spring.repository.UserRepository;
 
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping(path = "/api/test")
 public class TestController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/all")
-    public ResponseEntity<?> allAccess() {
+    @GetMapping(path = "/all")
+    public ResponseEntity<?> accepAll() {
         return ResponseEntity.ok(new MessageResponse("Public Content"));
     }
 
    
-    @GetMapping("/user")
+    @GetMapping(path="/user")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> userAccess() {
         return ResponseEntity.ok(new MessageResponse("User board"));

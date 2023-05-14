@@ -1,7 +1,7 @@
 package com.spirngauth.authentication_spring.models;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,24 +17,18 @@ public class Discount {
 
     private String name;
     private String desc;
-    private BigDecimal discount_percent;
+    private Double discountPercent;
     private boolean active;
 
     @Field("created_at")
     @CreatedDate
-    private ZonedDateTime createdAt;
+    private Date createdAt;
     @Field("modified_at")
     @LastModifiedDate
-    private ZonedDateTime modifiedAt;
+    private Date modifiedAt;
     @Field("deleted_at")
-    private ZonedDateTime deletedAt;
+    private Date deletedAt;
     
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
     public String getName() {
         return name;
     }
@@ -47,11 +41,11 @@ public class Discount {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-    public BigDecimal getDiscount_percent() {
-        return discount_percent;
+    public Double getDiscountPercent() {
+        return discountPercent;
     }
-    public void setDiscount_percent(BigDecimal discount_percent) {
-        this.discount_percent = discount_percent;
+    public void setDiscountPercent(Double discountPercent) {
+        this.discountPercent = discountPercent;
     }
     public boolean isActive() {
         return active;
@@ -59,24 +53,32 @@ public class Discount {
     public void setActive(boolean active) {
         this.active = active;
     }
-    public ZonedDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-    public ZonedDateTime getModifiedAt() {
+    public Date getModifiedAt() {
         return modifiedAt;
     }
-    public void setModifiedAt(ZonedDateTime modifiedAt) {
+    public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
-    public ZonedDateTime getDeletedAt() {
+    public Date getDeletedAt() {
         return deletedAt;
     }
-    public void setDeletedAt(ZonedDateTime deletedAt) {
+    public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
     }
+    @Override
+    public String toString() {
+        return "Discount [id=" + id + ", name=" + name + ", desc=" + desc + ", discountPercent=" + discountPercent
+                + ", active=" + active + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + ", deletedAt="
+                + deletedAt + "]";
+    }
+    
+    
 
     
 }

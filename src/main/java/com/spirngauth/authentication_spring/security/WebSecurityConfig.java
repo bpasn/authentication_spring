@@ -21,7 +21,7 @@ import com.spirngauth.authentication_spring.security.services.UserDetailsService
 
 @Configuration
 @EnableGlobalMethodSecurity(
-    // securedEnabled = true,
+    securedEnabled = true,
     // jsr250Enabled = true,
     prePostEnabled = true
 )
@@ -61,7 +61,6 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http.cors().and().csrf().disable()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

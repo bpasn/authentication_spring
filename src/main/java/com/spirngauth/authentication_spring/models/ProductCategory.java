@@ -1,6 +1,6 @@
 package com.spirngauth.authentication_spring.models;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -20,23 +20,17 @@ public class ProductCategory {
 
     @Field("created_at")
     @CreatedDate
-    private ZonedDateTime createdAt;
+    private Date createdAt = new Date();
+
     @Field("modified_at")
     @LastModifiedDate
-    private ZonedDateTime modifiedAt;
+    private Date modifiedAt = new Date();
     
 
     @Field("deleted_at")
-    private ZonedDateTime deletedAt;
+    private Date deletedAt;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -53,29 +47,38 @@ public class ProductCategory {
         this.desc = desc;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getModifiedAt() {
+    public Date getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(ZonedDateTime modifiedAt) {
+    public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 
-    public ZonedDateTime getDeletedAt() {
+    public Date getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(ZonedDateTime deletedAt) {
+    public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
     }
+
+    @Override
+    public String toString() {
+        return "ProductCategory [id=" + id + ", name=" + name + ", desc=" + desc + ", createdAt=" + createdAt
+                + ", modifiedAt=" + modifiedAt + ", deletedAt=" + deletedAt + "]";
+    }
+
+    
+    
 
     
 }

@@ -1,6 +1,7 @@
 package com.spirngauth.authentication_spring.models;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,41 +17,41 @@ public class ProductInventory {
     private Number quantity;
     @Field("created_at")
     @CreatedDate
-    private ZonedDateTime createdAt;
+    private Date createdAt = new Date();
     @Field("modified_at")
     @LastModifiedDate
-    private ZonedDateTime modifiedAt;
+    private Date modifiedAt = new Date();
     @Field("deleted_at")
-    private ZonedDateTime deletedAt;
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
+    private Date deletedAt;
+   
     public Number getQuantity() {
         return quantity;
     }
     public void setQuantity(Number quantity) {
         this.quantity = quantity;
     }
-    public ZonedDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-    public ZonedDateTime getModifiedAt() {
+    public Date getModifiedAt() {
         return modifiedAt;
     }
-    public void setModifiedAt(ZonedDateTime modifiedAt) {
+    public void setModifiedAt(Date modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
-    public ZonedDateTime getDeletedAt() {
+    public Date getDeletedAt() {
         return deletedAt;
     }
-    public void setDeletedAt(ZonedDateTime deletedAt) {
+    public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
+    }
+    @Override
+    public String toString() {
+        return "ProductInventory [id=" + id + ", quantity=" + quantity + ", createdAt=" + createdAt + ", modifiedAt="
+                + modifiedAt + ", deletedAt=" + deletedAt + "]";
     }
 
     
