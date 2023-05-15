@@ -2,28 +2,37 @@ package com.spirngauth.authentication_spring;
 
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@OpenAPIDefinition(
-		info = @Info(
-				title = "Hello World",
-				version = "1.0.0",
-				description = "This project is only for leaning",
-				termsOfService = "runcodenow"
-				// contact = @Contact(
-				// 		name = "admin",
-				// 		email = "spring_root@email.com"
-				// ),
-				// license = @License(
-				// 		name = "licence",
-				// 		url = "runcodenow"
-				// )
-		)
+// @OpenAPIDefinition(
+// 		info = @Info(
+// 				title = "Hello World",
+// 				version = "1.0.0",
+// 				description = "This project is only for leaning",
+// 				termsOfService = "runcodenow"
+// 				// contact = @Contact(
+// 				// 		name = "admin",
+// 				// 		email = "spring_root@email.com"
+// 				// ),
+// 				// license = @License(
+// 				// 		name = "licence",
+// 				// 		url = "runcodenow"
+// 				// )
+// 		)
+// )
+@OpenAPIDefinition(info = @Info(title = "My API", version = "v1"))
+@SecurityScheme(
+    name = "bearerAuth",
+    type = SecuritySchemeType.HTTP,
+    bearerFormat = "JWT",
+    scheme = "bearer"
 )
 public class AuthenticationSpringApplication {
 
@@ -32,7 +41,7 @@ public class AuthenticationSpringApplication {
 	}
 
 
-	//Create role
+	// Create role
 	// @Bean
 	// public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
 	// 	return args -> {

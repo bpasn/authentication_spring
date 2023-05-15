@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
 import com.spirngauth.authentication_spring.repository.UserRepository;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(path = "/api/test")
+@SecurityRequirement(name = "bearerAuth")
+
 public class TestController {
     @Autowired
     UserRepository userRepository;

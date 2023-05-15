@@ -1,6 +1,5 @@
 package com.spirngauth.authentication_spring.models;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;

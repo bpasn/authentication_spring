@@ -73,7 +73,7 @@ public class ProductController {
             return ResponseEntity.ok(new MessageResponse("Create Product Successfully !",ECode.SUCCESS));
         } catch (Exception e) {
             logger.error("ERROR [FUNCTION CREATEPRODUCT] : {}", e.getMessage());
-            return ResponseEntity.status(500).body(new MessageResponse(e.getMessage()));
+            throw new Exception("ERROR "+e.getMessage());
 
         }
 

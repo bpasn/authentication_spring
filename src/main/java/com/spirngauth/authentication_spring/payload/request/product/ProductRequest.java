@@ -1,11 +1,8 @@
 package com.spirngauth.authentication_spring.payload.request.product;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import com.spirngauth.authentication_spring.models.Discount;
-import com.spirngauth.authentication_spring.models.Product;
 import com.spirngauth.authentication_spring.models.ProductCategory;
 import com.spirngauth.authentication_spring.models.ProductInventory;
 

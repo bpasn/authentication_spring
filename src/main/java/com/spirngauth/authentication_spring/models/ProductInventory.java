@@ -1,6 +1,5 @@
 package com.spirngauth.authentication_spring.models;
 
-import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -15,12 +14,15 @@ public class ProductInventory {
     @Id
     private String id;
     private Number quantity;
+
     @Field("created_at")
     @CreatedDate
     private Date createdAt = new Date();
+    
     @Field("modified_at")
     @LastModifiedDate
     private Date modifiedAt = new Date();
+    
     @Field("deleted_at")
     private Date deletedAt;
    

@@ -7,12 +7,18 @@ public class InventoryRequest {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
 
     public InventoryRequest(int quantity) {
         this.quantity = quantity;
     }
 
     public InventoryRequest() {
+    }
+
+
+    public int getQuantity() {
+        return quantity;
     }
     
     

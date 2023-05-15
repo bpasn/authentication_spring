@@ -1,7 +1,5 @@
 package com.spirngauth.authentication_spring.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,14 +17,14 @@ import com.spirngauth.authentication_spring.security.jwt.AuthEntryPointJwt;
 import com.spirngauth.authentication_spring.security.jwt.AuthTokenFilter;
 import com.spirngauth.authentication_spring.security.services.UserDetailsServiceImpl;
 
+
 @Configuration
 @EnableGlobalMethodSecurity(
-    securedEnabled = true,
+    // securedEnabled = true,
     // jsr250Enabled = true,
     prePostEnabled = true
 )
 public class WebSecurityConfig {
-    private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
     @Autowired
     UserDetailsServiceImpl userDetailService;
 
@@ -42,13 +40,13 @@ public class WebSecurityConfig {
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        logger.info("CALL AUTHENTICATIONPROVIDER {}");
         authProvider.setUserDetailsService(userDetailService);
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
     }
 
+    
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
@@ -65,6 +63,7 @@ public class WebSecurityConfig {
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeRequests().requestMatchers("/api/auth/**").permitAll()
+        .requestMatchers("/swagger-ui/**","/javainuse-openapi/**").permitAll()
         .requestMatchers("/api/test/**").permitAll()
         .anyRequest()
         .permitAll();
@@ -75,4 +74,16 @@ public class WebSecurityConfig {
 
         return http.build();
     } 
+
+    // @Bean
+    // public InMemoryUserDetailsManager userDetailsService() {
+    //     UserDetails user = User.withDefaultPasswordEncoder()
+    //         .username("javainuser")
+    //         .password("password")
+    //         .roles("ADMIN")
+    //         .build();
+    //     return new InMemoryUserDetailsManager(user);
+    // }
+
+    
 }
