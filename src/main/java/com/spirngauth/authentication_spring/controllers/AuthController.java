@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +26,7 @@ import com.spirngauth.authentication_spring.payload.request.LoginRequest;
 import com.spirngauth.authentication_spring.payload.request.SignupRequest;
 import com.spirngauth.authentication_spring.payload.response.JwtResponse;
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
+import com.spirngauth.authentication_spring.provider.CustomAuthenticationProvider;
 import com.spirngauth.authentication_spring.repository.RoleRepository;
 import com.spirngauth.authentication_spring.repository.UserRepository;
 import com.spirngauth.authentication_spring.security.jwt.JwtUtils;
@@ -42,6 +44,8 @@ import java.util.Set;
 public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
     @Autowired
+    CustomAuthenticationProvider customAuthenticationProvider;
+    @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
@@ -58,23 +62,17 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        logger.info("\nLOGIN REQUEST \nusername: {}\npassword:{}", loginRequest.getUsername(),
-                loginRequest.getPassword());
-        Authentication authentication = authenticationManager.authenticate(
+      
+        Authentication authentication = customAuthenticationProvider.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        logger.info("\nSTEP 1 Create Token");
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        logger.info("\nSTEP 2 SetAuthentication");
         String jwt = jwtUtils.generateJwtToken(authentication);
-        logger.info("\nSTEP 3 GenerateToken");
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        logger.info("\nSTEP 4 userDetails");
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        logger.info("\nSTEP 5 getRole");
         return ResponseEntity.ok(
                 new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
@@ -85,12 +83,12 @@ public class AuthController {
 
             if (userRepository.existsByUsername(signupRequest.getUsername())) {
                 return ResponseEntity.badRequest()
-                        .body(new MessageResponse("Error: Username is already taken!", ECode.DUPPLICATE,409));
+                        .body(new MessageResponse("Error: Username is already taken!", HttpStatus.BAD_REQUEST,409));
             }
 
             if (userRepository.existsByEmail(signupRequest.getEmail())) {
                 return ResponseEntity.badRequest()
-                        .body(new MessageResponse("Error: Email is already in use!", ECode.DUPPLICATE,409));
+                        .body(new MessageResponse("Error: Email is already in use!", HttpStatus.BAD_REQUEST,409));
             }
 
             // Create new User's account
@@ -134,9 +132,9 @@ public class AuthController {
             }
             user.setUserRole(roles);
             userRepository.save(user);
-            return ResponseEntity.ok(new MessageResponse("User registerd successfully!", ECode.SUCCESS, 200));
+            return ResponseEntity.ok(new MessageResponse("User registerd successfully!", HttpStatus.CREATED, 200));
         } catch (Exception e) {
-            return ResponseEntity.ok(new MessageResponse("Error: " + e.getMessage(), ECode.INTERNAL_ERROR, 500));
+            return ResponseEntity.ok(new MessageResponse("Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, 500));
         }
 
     }

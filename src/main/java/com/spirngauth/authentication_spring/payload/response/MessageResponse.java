@@ -1,75 +1,48 @@
 package com.spirngauth.authentication_spring.payload.response;
 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import com.spirngauth.authentication_spring.models.ECode;
 
-public class MessageResponse {
+public class MessageResponse extends ResponseEntityExceptionHandler {
     private String message;
-    private ECode status;
-    private Number code = 200;
+    private HttpStatus status;
+    private int code = 200;
     // private Object payload;
 
 
-    
-
-    public Number getCode() {
-        return code;
-    }
-
-    public void setCode(Number code) {
-        this.code = code;
+    public int checkCode(int code){
+        switch (code) {
+            case 784076380: // User or password is wrong
+                return 400;
+            default:
+                return 9999;
+        }
     }
 
     public MessageResponse() {
     }
 
-    public MessageResponse(String message) {
-        this.message = message;
-    }
-    public MessageResponse(String message,ECode status,Number code) {
+    
+    public MessageResponse(String message,HttpStatus status,int code) {
         this.message = message;
         this.status = status;
         this.code = code;
     }
-    public MessageResponse(String message,ECode status) {
+    public MessageResponse(String message,HttpStatus status) {
         this.message = message;
         this.status = status;
     }
-
-    // public MessageResponse(String message, ECode statusCode, Boolean status) {
-    //     this.message = message;
-    //     this.statusCode = statusCode;
-    //     // this.status = status;
-    // }
-
-    // public MessageResponse(ECode statusCode,Object payload){
-    //     this.statusCode  = statusCode;
-    //     this.payload = payload;
-    // }
-
-
-    public ECode getStatusCode() {
-        return status;
+    
+    public MessageResponse(String message, int code) {
+        this.message = message;
+        this.code = code;
     }
-
-    public void setStatusCode(ECode statusCode) {
-        this.status = statusCode;
+    public MessageResponse(String message) {
+        this.message = message;
     }
-
-    // public Boolean getStatus() {
-    //     return status;
-    // }
-
-    // public void setStatus(Boolean status) {
-    //     this.status = status;
-    // }
-
-    // public Object getPayload() {
-    //     return payload;
-    // }
-
-    // public void setPayload(Object payload) {
-    //     this.payload = payload;
-    // }
 
     public String getMessage() {
         return message;
@@ -78,5 +51,24 @@ public class MessageResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    
+
 
 }
