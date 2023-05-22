@@ -83,7 +83,7 @@ public class WebSecurityConfig {
                 .authorizeRequests().requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
                 .requestMatchers("/api/test/**").authenticated()
-                .requestMatchers("/api/product/**").authenticated()
+                .requestMatchers("/api/product/**").permitAll()
                 .anyRequest()
                 .permitAll();
         http.authenticationProvider(authenticationProvider());

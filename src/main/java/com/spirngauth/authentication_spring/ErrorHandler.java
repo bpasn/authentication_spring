@@ -30,7 +30,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Service
-public class ErrorHandler {
+public class ErrorHandler extends Exception{
     @ExceptionHandler(value = { Exception.class, AuthenticationException.class, BadCredentialsException.class,
             UsernameNotFoundException.class, AccessDeniedException.class })
     public ResponseEntity<Object> handlerAnyException(Exception ex, WebRequest request) {

@@ -20,12 +20,14 @@ import com.spirngauth.authentication_spring.models.ECode;
 import com.spirngauth.authentication_spring.models.Product;
 import com.spirngauth.authentication_spring.models.ProductCategory;
 import com.spirngauth.authentication_spring.models.ProductInventory;
+import com.spirngauth.authentication_spring.payload.request.TestRequest;
 import com.spirngauth.authentication_spring.payload.request.product.ProductRequest;
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
 import com.spirngauth.authentication_spring.repository.DiscountRepository;
 import com.spirngauth.authentication_spring.repository.ProductCategoryRepository;
 import com.spirngauth.authentication_spring.repository.ProductInventoryRepository;
 import com.spirngauth.authentication_spring.repository.ProductRepository;
+import com.spirngauth.authentication_spring.services.CreateImagesService;
 
 import io.swagger.annotations.Authorization;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -52,6 +54,8 @@ public class ProductController {
     @Autowired
     private DiscountRepository discountRepository;
 
+    @Autowired
+    private CreateImagesService createImagesService;
     @GetMapping(path = "")
     public @ResponseBody String allAccept() {
         return "Product Controller";
@@ -89,5 +93,12 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProduct(){
         List<Product> product = productRepository.findAll();
         return new ResponseEntity<List<Product>>(product, null, 200);
+    }
+
+    @PostMapping("test")
+    public ResponseEntity<?> testRequest(@RequestBody TestRequest request) throws Exception{
+        System.out.println(request.toString());
+        createImagesService.createImage(request.getFiles());
+        return ResponseEntity.ok("request");
     }
 }

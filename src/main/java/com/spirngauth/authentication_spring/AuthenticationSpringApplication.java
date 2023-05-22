@@ -6,9 +6,14 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+@EnableConfigurationProperties
 
 @SpringBootApplication
 // @OpenAPIDefinition(
@@ -35,6 +40,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
     scheme = "bearer"
 )
 public class AuthenticationSpringApplication {
+
+	@Value("${app.name}")
+	private String appName;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthenticationSpringApplication.class, args);
