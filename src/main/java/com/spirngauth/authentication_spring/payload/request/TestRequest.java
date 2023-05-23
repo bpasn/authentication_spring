@@ -1,13 +1,11 @@
 package com.spirngauth.authentication_spring.payload.request;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 public class TestRequest {
     private String attributeSet;
     private String productType;
-    private List<File> files;
+    private MultipartFile[] files;
     public String getAttributeSet() {
         return attributeSet;
     }
@@ -20,16 +18,19 @@ public class TestRequest {
     public void setProductType(String productType) {
         this.productType = productType;
     }
-    public List<File> getFiles() {
-        return files;
-    }
-    public void setFiles(List<File> files) {
-        this.files = files;
-    }
+
     @Override
     public String toString() {
-        return "TestRequest [attributeSet=" + attributeSet + ", productType=" + productType + ", files=" + files + "]";
+        return "TestRequest [attributeSet=" + attributeSet + ", productType=" + productType + "]";
     }
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
+    }
+    
+    
     
     
     

@@ -1,5 +1,8 @@
 package com.spirngauth.authentication_spring.models;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Id;
@@ -9,7 +12,7 @@ public class ProductImage {
     @Id
     private String id;
 
-    private String[] images;
+    private List<String> images;
 
     private String attibuteSet;
     private String productType;
@@ -19,10 +22,10 @@ public class ProductImage {
     public void setId(String id) {
         this.id = id;
     }
-    public String[] getImages() {
+    public List<String> getImages() {
         return images;
     }
-    public void setImages(String[] images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
     public String getAttibuteSet() {
