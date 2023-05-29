@@ -1,10 +1,16 @@
 version: "3.8"
 services:
   database:
+<<<<<<< Updated upstream
     mem_limit: "128m"
     mem_reservation: "128m"
     cpus: 1.0
     cpuset: "2"
+=======
+    mem_limit: 128m
+    mem_reservation: 128M
+    cpus: 0.3
+>>>>>>> Stashed changes
     image: mongo:5.0.5
     ports:
       - 27018:27017
