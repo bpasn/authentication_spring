@@ -1,0 +1,60 @@
+{
+    "category": [
+        "Electronics",
+        "Apparel",
+        "Clothing",
+        "Furniture"
+    ],
+    "size": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL"
+    ],
+    "brand": [
+        "Microsoft",
+        "Samsung",
+        "HP",
+        "Ford"
+    ],
+    "color": [
+        "Black",
+        "White",
+        "Blue",
+        "Red",
+        "Green"
+    ],
+    "status": [
+        "In Stock",
+        "Out Of Stock"
+    ],
+    "visibility": [
+        "Yes",
+        "No"
+    ],
+    "attributeSet": [
+        "Default",
+        "Furniture",
+        "Shoes",
+        "Cell Phones",
+        "Monitors",
+        "Clothing"
+    ],
+    "taxClass": [
+        "Electronics",
+        "Apparel",
+        "Clothing",
+        "Furniture"
+    ],
+    "productType": [
+        "Simple Product",
+        "Configurable Product",
+        "Bundle Product",
+        "Grouped Product",
+        "Virtual Product",
+        "Downloadable Product"
+    ]
+    
+}

@@ -16,11 +16,16 @@ public class ProductCategory {
 
     private String name;
 
-    private String desc;
+    // private String desc;
+
+    
 
     @Field("created_at")
     @CreatedDate
     private Date createdAt = new Date();
+
+    public ProductCategory() {
+    }
 
     @Field("modified_at")
     @LastModifiedDate
@@ -38,13 +43,18 @@ public class ProductCategory {
     public void setName(String name) {
         this.name = name;
     }
+    
 
-    public String getDesc() {
-        return desc;
-    }
+    // public String getDesc() {
+    //     return desc;
+    // }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    // public void setDesc(String desc) {
+    //     this.desc = desc;
+    // }
+
+    public ProductCategory(String name) {
+        this.name = name;
     }
 
     public Date getCreatedAt() {
@@ -73,7 +83,7 @@ public class ProductCategory {
 
     @Override
     public String toString() {
-        return "ProductCategory [id=" + id + ", name=" + name + ", desc=" + desc + ", createdAt=" + createdAt
+        return "ProductCategory [id=" + id + ", name=" + name + ", createdAt=" + createdAt
                 + ", modifiedAt=" + modifiedAt + ", deletedAt=" + deletedAt + "]";
     }
 

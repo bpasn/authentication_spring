@@ -1,6 +1,10 @@
 version: "3.8"
 services:
   database:
+    mem_limit: "128m"
+    mem_reservation: "128m"
+    cpus: 1.0
+    cpuset: "2"
     image: mongo:5.0.5
     ports:
       - 27018:27017
