@@ -1,5 +1,8 @@
 package com.spirngauth.authentication_spring.controllers;
 
+
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,16 +11,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spirngauth.authentication_spring.models.Discount;
@@ -25,6 +28,7 @@ import com.spirngauth.authentication_spring.models.Product;
 import com.spirngauth.authentication_spring.models.ProductCategory;
 import com.spirngauth.authentication_spring.models.ProductImage;
 import com.spirngauth.authentication_spring.models.ProductInventory;
+import com.spirngauth.authentication_spring.models.ProductOption;
 import com.spirngauth.authentication_spring.payload.request.InsertImageProductReq;
 import com.spirngauth.authentication_spring.payload.request.product.ProductRequest;
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
@@ -33,6 +37,7 @@ import com.spirngauth.authentication_spring.repository.DiscountRepository;
 import com.spirngauth.authentication_spring.repository.ProductCategoryRepository;
 import com.spirngauth.authentication_spring.repository.ProductImageRepository;
 import com.spirngauth.authentication_spring.repository.ProductInventoryRepository;
+import com.spirngauth.authentication_spring.repository.ProductOptionRepo;
 import com.spirngauth.authentication_spring.repository.ProductRepository;
 import com.spirngauth.authentication_spring.services.CreateImagesService;
 
@@ -56,6 +61,8 @@ public class ProductController {
 
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
+    @Autowired
+    private ProductOptionRepo productOptionRepo;
 
     @Autowired
     private ProductInventoryRepository productInventoryRepository;
@@ -69,19 +76,23 @@ public class ProductController {
     @Autowired
     ProductImageRepository productImageRepository;
 
+    @Autowired
+    MongoTemplate mongoTemplate;
+
     @GetMapping(path = "")
     public ResponseEntity<?> loadPage() {
 
-        List<ProductCategory> category = productCategoryRepository.findByProductCategory();
+        List<ProductOption> productOptions = productOptionRepo.findAll();
 
-        // HashMap<String,HashMap<String,String>> map = new HashMap<>();
-        // map.put("category", category);
+
+        HashMap<String,List<ProductOption>> map = new HashMap<>();
+        map.put("productOption",productOptions);
         // map.put("size", "size");
         // map.put("productType", "productType");
         // map.put("attributeSet", "attributeSet");
         // map.put("color", "color");
         // map.put("brand", "brand");
-        return ResponseEntity.ok(category);
+        return ResponseEntity.ok(map);
     }
 
     @PostMapping("/create")
@@ -118,7 +129,8 @@ public class ProductController {
         return new ResponseEntity<List<Product>>(product, null, 200);
     }
 
-    @PostMapping(path = "/insert-image-product", consumes = "multipart/form-data", produces = { "application/json", "application/xml" })
+    @PostMapping(path = "/insert-image-product", consumes = "multipart/form-data", produces = { "application/json",
+            "application/xml" })
     public ResponseEntity<?> testRequest(@ModelAttribute InsertImageProductReq request) {
         System.out.println(request.toString());
         try {
@@ -130,27 +142,26 @@ public class ProductController {
 
             productImage.setId(id);
 
-            List<String> paths = createImagesService.createImage(request.getFiles(),id);
+            List<String> paths = createImagesService.createImage(request.getFiles(), id);
             productImage.setImages(paths);
             productImageRepository.save(productImage);
             Map<String, String> map = new HashMap<>();
             map.put("id", id);
             map.put("message", "Upload Images Successfully!");
 
-            
             return ResponseEntity.ok(new ResponseMessage(true, map));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
-    
-    @PostMapping(path = "/update-image-product", consumes = "multipart/form-data", produces = { "application/json", "application/xml" })
+
+    @PostMapping(path = "/update-image-product", consumes = "multipart/form-data", produces = { "application/json",
+            "application/xml" })
     public ResponseEntity<?> updateImageProduct(@ModelAttribute InsertImageProductReq request) {
         System.out.println(request.toString());
         try {
 
-            List<String> paths = createImagesService.createImage(request.getFiles(),request.getId());
+            List<String> paths = createImagesService.createImage(request.getFiles(), request.getId());
             ProductImage productImage = new ProductImage();
             productImage.setAttibuteSet(request.getAttributeSet());
             productImage.setProductType(request.getProductType());
@@ -161,7 +172,6 @@ public class ProductController {
 
             productImage.setImages(paths);
             String id = productImageRepository.save(productImage).getId();
-
 
             Map<String, String> map = new HashMap<>();
             map.put("id", id);
