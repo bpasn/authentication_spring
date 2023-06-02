@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 docker/db
+docker/mysql
 logger
 logger/*
 *.log
