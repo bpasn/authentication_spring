@@ -1,6 +1,9 @@
 package com.spirngauth.authentication_spring;
 
 
+import com.spirngauth.authentication_spring.models.ERole;
+import com.spirngauth.authentication_spring.models.RoleModel;
+import com.spirngauth.authentication_spring.repository.RoleRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -9,10 +12,15 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 
 @EnableConfigurationProperties
@@ -47,23 +55,27 @@ public class AuthenticationSpringApplication {
 	private String appName;
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthenticationSpringApplication.class, args);
+
+		SpringApplication app = new SpringApplication(AuthenticationSpringApplication.class);
+		app.setDefaultProperties(Collections.singletonMap("server.port",8833));
+		System.out.println("SERVER START http://localhost:8888");
+		app.run();
 	}
 
 	// Create role
-	// @Bean
-	// public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
-		
-	// 	return args -> {
-	// 		List<RoleModel> role = List.of(
-	// 				new RoleModel(ERole.ROLE_ADMIN),
-	// 				new RoleModel(ERole.ROLE_MODERATOR),
-	// 				new RoleModel(ERole.ROLE_USER)
+//	 @Bean
+//	 public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
+//
+//	 	return args -> {
+//	 		List<RoleModel> role = List.of(
+//	 				new RoleModel(ERole.ROLE_ADMIN),
+//	 				new RoleModel(ERole.ROLE_MODERATOR),
+//	 				new RoleModel(ERole.ROLE_USER)
+//
+//	 		);
+//	 		roleRepository.saveAll(role);
+//	 	};
+//	 }
 
-	// 		);
-	// 		roleRepository.saveAll(role);
-	// 	};
-	// }
-	
 
 }

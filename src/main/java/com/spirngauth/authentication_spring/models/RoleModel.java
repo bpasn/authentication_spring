@@ -1,31 +1,40 @@
 package com.spirngauth.authentication_spring.models;
 
+import jakarta.persistence.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Id;
-
-@Document("roles")
+@Entity
+@Table(name = "roles")
 public class RoleModel {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private ERole name;
 
-    public RoleModel(){}
-    public RoleModel(ERole name){
+    public RoleModel() {
+
+    }
+
+    public RoleModel(ERole name) {
         this.name = name;
     }
-    public String getId() {
+
+    public Integer getId() {
         return id;
     }
-    public void setId(String id) {
+
+    public void setId(Integer id) {
         this.id = id;
     }
+
     public ERole getName() {
         return name;
     }
+
     public void setName(ERole name) {
         this.name = name;
     }
-    
 }

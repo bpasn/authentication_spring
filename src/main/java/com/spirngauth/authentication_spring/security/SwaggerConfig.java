@@ -22,22 +22,16 @@ public class SwaggerConfig {
         return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
     }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "Spring Boot Blog REST APIs",
-                "Spring Boot Blog REST API Documentation",
-                "1",
-                "Terms of service",
-                new Contact("Ramesh Fadatare", "www.javaguides.net", "ramesh@gmail.com"),
-                "License of API",
-                "API license URL",
-                Collections.emptyList());
-    }
+//    private ApiInfo apiInfo() {
+//        return new ApiInfo(
+//                "Spring Boot Blog REST APIs",
+//                "Spring Boot Blog REST API Documentation");
+//    }
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
+//                .apiInfo(apiInfo())
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()

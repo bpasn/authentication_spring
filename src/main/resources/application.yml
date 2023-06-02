@@ -1,0 +1,36 @@
+app:
+  name: spring_boot_authentication
+  MOUNT_PATH: src/main/resources/storage
+server:
+  port: 8888
+spring:
+  data:
+    mongodb:
+      uri: mongodb://spring_user:1234@localhost:27018/spring_db
+      database: spring_db
+    autoconfigure:
+      exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    url: jdbc:mysql://localhost:3300/spring_db?useSSL=false
+    username: admin
+    password: 1234
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    root: warn
+  pattern:
+    console: '%-5level [%t] [%logger - %line]: %m%n'
+    file: '[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%t] [%logger - %line]: %m%n'
+  file:
+    path: logger/
+    name: access.log
+
+bezkoder:
+  app:
+    jwtSecret: +VvMvH8Y+/QYlYPHdkXwnO8wkVWpbld94zPohs1goMnFoEqdOGiDjMVBDg9i+wFNi/0de0JfOY0YTw+BfOZm+g==
+    jwtExpirationMs: 3600000

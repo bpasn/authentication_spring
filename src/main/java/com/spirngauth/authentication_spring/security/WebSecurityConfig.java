@@ -9,6 +9,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,12 +23,11 @@ import com.spirngauth.authentication_spring.security.jwt.AuthTokenFilter;
 import com.spirngauth.authentication_spring.security.services.UserDetailsServiceImpl;
 
 @Configuration
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true)
-@ComponentScan("com.spirngauth.authentication_spring")
-@EnableWebSecurity
+@EnableMethodSecurity
+//@EnableGlobalMethodSecurity(
+//        securedEnabled = true,
+//        jsr250Enabled = true,
+//        prePostEnabled = true)
 public class WebSecurityConfig {
     @Autowired
     CustomAuthenticationProvider customAuthenticationProvider;
@@ -70,11 +70,6 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // @Autowired
-    // public void whateverMethodName(AuthenticationManagerBuilder auth) throws Exception {
-    //     auth.authenticationProvider(userProvider);
-    // }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
@@ -95,14 +90,5 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    // @Bean
-    // public InMemoryUserDetailsManager userDetailsService() {
-    // UserDetails user = User.withDefaultPasswordEncoder()
-    // .username("javainuser")
-    // .password("password")
-    // .roles("ADMIN")
-    // .build();
-    // return new InMemoryUserDetailsManager(user);
-    // }
 
 }

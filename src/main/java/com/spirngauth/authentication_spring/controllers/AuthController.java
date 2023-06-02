@@ -91,10 +91,11 @@ public class AuthController {
             UserModel user = new UserModel(
                     signupRequest.getUsername(),
                     signupRequest.getEmail(),
+                    encoder.encode(signupRequest.getPassword()),
                     signupRequest.getFirstName(),
                     signupRequest.getLastName(),
-                    signupRequest.getTelephone(),
-                    encoder.encode(signupRequest.getPassword()));
+                    signupRequest.getTelephone()
+            );
 
             List<String> strRoles = signupRequest.getRole();
             Set<RoleModel> roles = new HashSet<>();
@@ -126,7 +127,7 @@ public class AuthController {
                 });
 
             }
-            user.setUserRole(roles);
+            user.setRoles(roles);
             userRepository.save(user);
             return ResponseEntity.ok(new MessageResponse("User registerd successfully!", HttpStatus.CREATED, 200));
         } catch (Exception e) {
