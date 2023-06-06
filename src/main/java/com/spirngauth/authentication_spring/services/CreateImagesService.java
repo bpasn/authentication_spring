@@ -24,7 +24,6 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
-import javax.xml.bind.DatatypeConverter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
