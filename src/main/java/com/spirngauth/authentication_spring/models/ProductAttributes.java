@@ -1,16 +1,26 @@
 package com.spirngauth.authentication_spring.models;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Table(name ="product_attributes")
+@Entity
+@Table(name = "product_attributes")
 public class ProductAttributes {
-
-    @JoinTable(name = "products", joinColumns = @JoinColumn(name = "id"))
-    private Long productId;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
-    @JoinTable(name = "attributes", joinColumns = @JoinColumn(name = "id"))
-    private Long attributeId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private Products productId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "attribute_id")
+    private Attributes attributeId;
 }

@@ -1,25 +1,26 @@
 package com.spirngauth.authentication_spring.models;
 
-import java.time.LocalDateTime;
-
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "attributes")
-public class Attributes {
+public class Tags {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String attributeName;
+    private String tagName;
+    private String icon;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "product_tags",
+            joinColumns = @JoinColumn(name = "tag_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Products> product;
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -34,12 +35,20 @@ public class Attributes {
         this.id = id;
     }
 
-    public String getAttributeName() {
-        return attributeName;
+    public String getTagName() {
+        return tagName;
     }
 
-    public void setAttributeName(String attributeName) {
-        this.attributeName = attributeName;
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -56,15 +65,5 @@ public class Attributes {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Attributes{" +
-                "id=" + id +
-                ", attributeName='" + attributeName + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 }

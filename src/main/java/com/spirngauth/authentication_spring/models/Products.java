@@ -29,7 +29,7 @@ public class Products {
     private String productDescription;
     private Double productWeight;
     private String productNote;
-    private Boolean published;
+
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -115,14 +115,6 @@ public class Products {
 
     public void setProductNote(String productNote) {
         this.productNote = productNote;
-    }
-
-    public Boolean getPublished() {
-        return published;
-    }
-
-    public void setPublished(Boolean published) {
-        this.published = published;
     }
 
     public LocalDateTime getCreatedAt() {

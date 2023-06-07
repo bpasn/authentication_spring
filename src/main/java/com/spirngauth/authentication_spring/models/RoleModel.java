@@ -1,7 +1,6 @@
 package com.spirngauth.authentication_spring.models;
 
 import jakarta.persistence.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Entity
 @Table(name = "roles")

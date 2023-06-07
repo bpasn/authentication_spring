@@ -7,18 +7,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+@Entity
 @Table(name = "variants")
 public class Variants {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinTable(name = "variant_attribute_values", joinColumns = @JoinColumn(name = "id"))
-    private Long variantAttributeValueId;
-    
-    @JoinTable(name = "products", joinColumns = @JoinColumn(name = "id"))
-    private Long productId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "varinat_attribute_value_id")
+    private VariantAttributeValues variantAttributeValueId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private Products productId;
 
     public Long getId() {
         return id;
@@ -28,21 +33,22 @@ public class Variants {
         this.id = id;
     }
 
-    public Long getVariantAttributeValueId() {
+    public VariantAttributeValues getVariantAttributeValueId() {
         return variantAttributeValueId;
     }
 
-    public void setVariantAttributeValueId(Long variantAttributeValueId) {
+    public void setVariantAttributeValueId(VariantAttributeValues variantAttributeValueId) {
         this.variantAttributeValueId = variantAttributeValueId;
     }
 
-    public Long getProductId() {
+    public Products getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(Products productId) {
         this.productId = productId;
     }
 
-    
+  
+
 }

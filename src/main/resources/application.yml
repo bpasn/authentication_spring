@@ -4,12 +4,12 @@ app:
 server:
   port: 8888
 spring:
-  data:
-    mongodb:
-      uri: mongodb://spring_user:1234@localhost:27018/spring_db
-      database: spring_db
-    autoconfigure:
-      exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#  data:
+#    mongodb:
+#      uri: mongodb://spring_user:1234@localhost:27018/spring_db
+#      database: spring_db
+#    autoconfigure:
+#      exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
     url: jdbc:mysql://localhost:3300/spring_db?useSSL=false
     username: admin
@@ -21,14 +21,15 @@ spring:
     hibernate:
       ddl-auto: update
 logging:
-  level:
-    root: warn
+  file: 
+    name: src/main/resources/storage/logger/application-debug.log
   pattern:
-    console: '%-5level [%t] [%logger - %line]: %m%n'
-    file: '[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%t] [%logger - %line]: %m%n'
-  file:
-    path: logger/
-    name: access.log
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level : %msg%n"
+  level:
+    ['org.springframework.web']: ERROR
+    ['com.howtodoinjava']: INFO
+    ['org.hibernate']: ERROR
 
 bezkoder:
   app:

@@ -18,8 +18,8 @@ services:
 #      - ./db:/data/db
 
   mysql:
-    mem_limit: 512M
-    mem_reservation: 256M
+    mem_limit: 200M
+    mem_reservation: 200M
     cpus: 0.3
     image: mysql:8.0
     ports:

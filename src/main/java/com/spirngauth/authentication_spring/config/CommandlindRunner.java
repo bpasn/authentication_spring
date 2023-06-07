@@ -1,90 +1,57 @@
-//package com.spirngauth.authentication_spring.config;
-//
-//import java.io.InputStream;
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.context.annotation.Configuration;
-//
-//import com.fasterxml.jackson.core.type.TypeReference;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.spirngauth.authentication_spring.models.ProductAttribute;
-//import com.spirngauth.authentication_spring.models.ProductBrand;
-//import com.spirngauth.authentication_spring.models.ProductCategory;
-//import com.spirngauth.authentication_spring.models.ProductColor;
-//import com.spirngauth.authentication_spring.models.ProductOption;
-//import com.spirngauth.authentication_spring.models.ProductSize;
-//import com.spirngauth.authentication_spring.models.ProductType;
-//import com.spirngauth.authentication_spring.repository.ProductAttributeRepository;
-//import com.spirngauth.authentication_spring.repository.ProductBrandRepo;
-//import com.spirngauth.authentication_spring.repository.ProductCategoryRepository;
-//import com.spirngauth.authentication_spring.repository.ProductColorRepo;
-//import com.spirngauth.authentication_spring.repository.ProductOptionRepo;
-//import com.spirngauth.authentication_spring.repository.ProductSizeRepo;
-//import com.spirngauth.authentication_spring.repository.ProductTypeRepository;
-//
-//@Configuration
-//public class CommandlindRunner implements CommandLineRunner {
-//    private final String JSONFILE = "/data.json";
-//
-//    @Autowired
-//    private ProductCategoryRepository productCategory;
-//    @Autowired
-//    private ProductOptionRepo productOptionRepo;
-//    @Autowired
-//    private ProductSizeRepo productSizeRepo;
-//    @Autowired
-//    private ProductAttributeRepository productAttributeRepository;
-//    @Autowired
-//    private ProductBrandRepo productBrandRepo;
-//    @Autowired
-//    private ProductColorRepo productColorRepo;
-//    @Autowired
-//    private ProductTypeRepository productTypeRepository;
-//
-//    @Override
-//    public void run(String... args) throws Exception {
-//        if (productOptionRepo.findAll().isEmpty()) {
-//            TypeReference<HashMap<String, List<String>>> typeReference = new TypeReference<HashMap<String, List<String>>>() {
-//            };
-//
-//            InputStream inputStream = TypeReference.class.getResourceAsStream(JSONFILE);
-//
-//            HashMap<String, List<String>> json = new ObjectMapper().readValue(inputStream, typeReference);
-//            List<ProductCategory> category = new ArrayList<>();
-//
-//            List<ProductSize> size = new ArrayList<>();
-//            List<ProductBrand> brand = new ArrayList<>();
-//            List<ProductColor> color = new ArrayList<>();
-//            List<ProductAttribute> attributeSet = new ArrayList<>();
-//            List<ProductType> productType = new ArrayList<>();
-//
-//            json.get("category").forEach(itm -> category.add(new ProductCategory(itm)));
-//            json.get("size").forEach(itm -> size.add(new ProductSize(itm)));
-//            json.get("brand").forEach(itm -> brand.add(new ProductBrand(itm)));
-//            json.get("color").forEach(itm -> color.add(new ProductColor(itm)));
-//            json.get("attributeSet").forEach(itm -> attributeSet.add(new ProductAttribute(itm)));
-//            json.get("productType").forEach(itm -> productType.add(new ProductType(itm)));
-//            ProductOption productOption = new ProductOption();
-//            productCategory.saveAll(category);
-//            productAttributeRepository.saveAll(attributeSet);
-//            productBrandRepo.saveAll(brand);
-//            productColorRepo.saveAll(color);
-//            productSizeRepo.saveAll(size);
-//            productTypeRepository.saveAll(productType);
-//
-//            productOption.setCategories(category);
-//            productOption.setAttributes(attributeSet);
-//            productOption.setBrands(brand);
-//            productOption.setColors(color);
-//            productOption.setProductTypes(productType);
-//            productOption.setSizes(size);
-//            productOptionRepo.save(productOption);
-//        }
-//
-//    }
-//
-//}
+// package com.spirngauth.authentication_spring.config;
+
+// import java.io.InputStream;
+// import java.util.ArrayList;
+// import java.util.HashMap;
+// import java.util.List;
+
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.CommandLineRunner;
+// import org.springframework.context.annotation.Configuration;
+
+// import com.fasterxml.jackson.core.type.TypeReference;
+// import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.spirngauth.authentication_spring.models.AttributeValues;
+// import com.spirngauth.authentication_spring.models.Attributes;
+// import com.spirngauth.authentication_spring.repository.AttributeRepo;
+// import com.spirngauth.authentication_spring.repository.AttributeValueRepo;
+
+// import lombok.val;
+
+// @Configuration
+// public class CommandlindRunner implements CommandLineRunner {
+//     private final String JSONFILE = "/data.json";
+
+//     @Autowired
+//     private AttributeRepo attributeRepo;
+
+//     @Autowired
+//     private AttributeValueRepo attributeValueRepo;
+
+//     private static final Logger logger = LoggerFactory.getLogger(CommandLineRunner.class);
+
+//     @Override
+//     public void run(String... args) throws Exception {
+//         TypeReference<HashMap<String, List<String>>> typeReference = new TypeReference<HashMap<String, List<String>>>() {
+//         };
+
+//         InputStream inputStream = TypeReference.class.getResourceAsStream(JSONFILE);
+
+//         HashMap<String, List<String>> json = new ObjectMapper().readValue(inputStream, typeReference);
+//         json.forEach((key, value) -> {
+//             Attributes atts = new Attributes();
+//             atts.setAttributeName(key);
+//             attributeRepo.save(atts);
+//             value.forEach((String val) -> {
+//                 AttributeValues attrv = new AttributeValues();
+//                 attrv.setAttributeValue(val);
+//                 attrv.setAttributeId(atts);
+//                 attributeValueRepo.save(attrv);
+
+//             });
+//         });
+//     }
+
+// }

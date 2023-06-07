@@ -6,18 +6,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "variant_values")
 public class VariantValues {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @JoinTable(name = "variants", joinColumns = @JoinColumn(name = "id"))
-    private Long variantId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "variant_id")
+    private Variants variantId;
 
     private Double price;
     private Number quantity;
@@ -27,10 +28,10 @@ public class VariantValues {
     public void setId(Long id) {
         this.id = id;
     }
-    public Long getVariantId() {
+    public Variants getVariantId() {
         return variantId;
     }
-    public void setVariantId(Long variantId) {
+    public void setVariantId(Variants variantId) {
         this.variantId = variantId;
     }
     public Double getPrice() {
@@ -46,5 +47,5 @@ public class VariantValues {
         this.quantity = quantity;
     }
 
-    
+   
 }

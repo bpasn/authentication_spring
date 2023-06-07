@@ -1,9 +1,6 @@
 package com.spirngauth.authentication_spring;
 
 
-import com.spirngauth.authentication_spring.models.ERole;
-import com.spirngauth.authentication_spring.models.RoleModel;
-import com.spirngauth.authentication_spring.repository.RoleRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -12,15 +9,11 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 
 @EnableConfigurationProperties

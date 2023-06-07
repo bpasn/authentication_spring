@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
@@ -15,28 +16,29 @@ import jakarta.persistence.Table;
 public class VariantAttributeValues {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long variantAttributeValueId;
+    private Long id;
 
-    @JoinTable(name = "attribute_value",joinColumns = @JoinColumn(name = "id"))
-    private Long attributeValueId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "attribute_value_id",referencedColumnName = "id")
+    private AttributeValues attributeValueId;
 
-    public Long getVariantAttributeValueId() {
-        return variantAttributeValueId;
+    public Long getId() {
+        return id;
     }
 
-    public void setVariantAttributeValueId(Long variantAttributeValueId) {
-        this.variantAttributeValueId = variantAttributeValueId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getAttributeValueId() {
+    public AttributeValues getAttributeValueId() {
         return attributeValueId;
     }
 
-    public void setAttributeValueId(Long attributeValueId) {
+    public void setAttributeValueId(AttributeValues attributeValueId) {
         this.attributeValueId = attributeValueId;
     }
 
-    
+ 
 
 
 

@@ -2,19 +2,18 @@ package com.spirngauth.authentication_spring.models;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "attribute_values")
 public class AttributeValues {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @JoinTable(name = "attributes", joinColumns = @JoinColumn(name = "id"))
-    private Long attributeId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attribute_id")
+    private Attributes attributeId;
 
     private String attributeValue;
-    private String color;
 
     public Long getId() {
         return id;
@@ -24,11 +23,11 @@ public class AttributeValues {
         this.id = id;
     }
 
-    public Long getAttributeId() {
+    public Attributes getAttributeId() {
         return attributeId;
     }
 
-    public void setAttributeId(Long attributeId) {
+    public void setAttributeId(Attributes attributeId) {
         this.attributeId = attributeId;
     }
 
@@ -40,12 +39,12 @@ public class AttributeValues {
         this.attributeValue = attributeValue;
     }
 
-    public String getColor() {
-        return color;
+    @Override
+    public String toString() {
+        return "AttributeValues{" +
+                "id=" + id +
+                ", attributeId=" + attributeId +
+                ", attributeValue='" + attributeValue + '\'' +
+                '}';
     }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
 }

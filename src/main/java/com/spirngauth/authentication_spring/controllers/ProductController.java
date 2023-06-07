@@ -1,10 +1,9 @@
 package com.spirngauth.authentication_spring.controllers;
 
 import com.spirngauth.authentication_spring.payload.response.BaseResponse;
-import com.spirngauth.authentication_spring.payload.response.ProductResponse;
 import com.spirngauth.authentication_spring.services.SProduct;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
+import io.swagger.models.Response;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 
-import javax.json.Json;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,10 +25,15 @@ public class ProductController {
     private SProduct sProduct;
 
 
-    @GetMapping("")
-    public ResponseEntity<List<String>> getProduct(){
-        return ResponseEntity.ok(sProduct.getAllProduct());
-    }
+     @GetMapping("")
+     public ResponseEntity<?> getProduct(){
+         return ResponseEntity.ok(sProduct.response(true));
+     }
+
+     @GetMapping("loading-page")
+     public ResponseEntity<?> loadingPage(){
+         return ResponseEntity.ok(sProduct.loadingPage());
+     }
 
 
     @PostMapping(value = "/post", consumes ="application/json")
