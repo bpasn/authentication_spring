@@ -34,6 +34,7 @@ build/
 *.gz
 docker/db
 docker/mysql
+docker/mysql-ecommerce
 logger
 logger/*
 *.log
