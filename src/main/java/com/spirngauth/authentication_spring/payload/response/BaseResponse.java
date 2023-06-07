@@ -1,5 +1,6 @@
 package com.spirngauth.authentication_spring.payload.response;
 
+
 public class BaseResponse {
     private Boolean success;
     private String message;
@@ -15,8 +16,5 @@ public class BaseResponse {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    
-   
 
 }

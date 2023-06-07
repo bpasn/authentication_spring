@@ -1,12 +1,16 @@
 package com.spirngauth.authentication_spring.models;
 
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -17,9 +21,9 @@ public class Variants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "varinat_attribute_value_id")
-    private VariantAttributeValues variantAttributeValueId;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "variant_attribute_values", joinColumns = @JoinColumn(name = "variant_attribute_value_id"), inverseJoinColumns = @JoinColumn(name = "attribute_value_id"))
+    private Set<VariantAttributeValues> variantAttributeValueId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
@@ -33,11 +37,11 @@ public class Variants {
         this.id = id;
     }
 
-    public VariantAttributeValues getVariantAttributeValueId() {
+    public Set<VariantAttributeValues> getVariantAttributeValueId() {
         return variantAttributeValueId;
     }
 
-    public void setVariantAttributeValueId(VariantAttributeValues variantAttributeValueId) {
+    public void setVariantAttributeValueId(Set<VariantAttributeValues> variantAttributeValueId) {
         this.variantAttributeValueId = variantAttributeValueId;
     }
 
@@ -49,6 +53,5 @@ public class Variants {
         this.productId = productId;
     }
 
-  
-
+    
 }

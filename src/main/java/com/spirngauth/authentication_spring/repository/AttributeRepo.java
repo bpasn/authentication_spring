@@ -4,8 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spirngauth.authentication_spring.models.Attributes;
 import java.util.List;
+import java.util.Optional;
 
 
 public interface AttributeRepo extends JpaRepository<Attributes,Long>{
-    Attributes findByAttributeName(String attributeName);
+    Optional<Attributes> findByAttributeName(String attributeName);
 }

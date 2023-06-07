@@ -1,20 +1,17 @@
 package com.spirngauth.authentication_spring.models;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "products",uniqueConstraints = {
-    @UniqueConstraint(columnNames = "id")
+@Table(name = "products", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "id")
 })
 public class Products {
     @Id
@@ -22,14 +19,16 @@ public class Products {
     private Long id;
     private String productName;
     private String SKU;
-    private String regularPrice;
-    private String discountPrice;
+    private String price;
+    private String discount;
     private Number quantity;
+    private String status;
     private String shortDescription;
     private String productDescription;
-    private Double productWeight;
-    private String productNote;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "product_attributes", joinColumns = @JoinColumn(name = "attribute_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Attributes> attributes = new HashSet<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -61,20 +60,20 @@ public class Products {
         SKU = sKU;
     }
 
-    public String getRegularPrice() {
-        return regularPrice;
+    public String getPrice() {
+        return price;
     }
 
-    public void setRegularPrice(String regularPrice) {
-        this.regularPrice = regularPrice;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public String getDiscountPrice() {
-        return discountPrice;
+    public String getDiscount() {
+        return discount;
     }
 
-    public void setDiscountPrice(String discountPrice) {
-        this.discountPrice = discountPrice;
+    public void setDiscount(String discount) {
+        this.discount = discount;
     }
 
     public Number getQuantity() {
@@ -83,6 +82,14 @@ public class Products {
 
     public void setQuantity(Number quantity) {
         this.quantity = quantity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getShortDescription() {
@@ -101,37 +108,30 @@ public class Products {
         this.productDescription = productDescription;
     }
 
-    public Double getProductWeight() {
-        return productWeight;
+    public Set<Attributes> getAttributes() {
+        return attributes;
     }
 
-    public void setProductWeight(Double productWeight) {
-        this.productWeight = productWeight;
+    public void setAttributes(Set<Attributes> attributes) {
+        this.attributes = attributes;
     }
 
-    public String getProductNote() {
-        return productNote;
-    }
+    // public LocalDateTime getCreatedAt() {
+    //     return createdAt;
+    // }
 
-    public void setProductNote(String productNote) {
-        this.productNote = productNote;
-    }
+    // public void setCreatedAt(LocalDateTime createdAt) {
+    //     this.createdAt = createdAt;
+    // }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+    // public LocalDateTime getUpdatedAt() {
+    //     return updatedAt;
+    // }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    // public void setUpdatedAt(LocalDateTime updatedAt) {
+    //     this.updatedAt = updatedAt;
+    // }
 
     
+
 }
