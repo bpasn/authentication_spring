@@ -1,19 +1,20 @@
 package com.spirngauth.authentication_spring.controllers;
 
-import com.spirngauth.authentication_spring.models.Products;
 import com.spirngauth.authentication_spring.payload.request.product.RequestProduct;
-import com.spirngauth.authentication_spring.payload.response.BaseResponse;
 import com.spirngauth.authentication_spring.payload.response.ResPayload;
 import com.spirngauth.authentication_spring.services.SProduct;
 
-import io.swagger.models.Response;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ import java.util.Map;
 @RequestMapping(path = "/api/product")
 @SecurityRequirement(name = "bearerAuth")
 public class ProductController {
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private SProduct sProduct;
 
@@ -34,17 +36,15 @@ public class ProductController {
         return ResponseEntity.ok(sProduct.loadingPage());
     }
 
-    @PostMapping(value = "/post", consumes = "application/json")
-    public ResponseEntity<ResPayload> postProduct(@RequestBody RequestProduct product) {
+    @PostMapping(value = "/post")
+    public ResponseEntity<ResPayload> postProduct(@Valid @RequestBody RequestProduct product) {
+        logger.info(product.toString());
         return ResponseEntity.ok(sProduct.createProduct(product));
     }
 
     @GetMapping("get")
-    public ResponseEntity<HashMap<String, String>> get() {
-        HashMap<String, String> res = new HashMap<>();
-        res.put("status", "9999");
-        res.put("payload", "PRODUCT IS NULL");
-        return ResponseEntity.ok(res);
+    public ResponseEntity<ResPayload> getProduct() {
+        return ResponseEntity.ok(sProduct.getAllProduct());
     }
 
 }

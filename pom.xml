@@ -95,6 +95,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- LOGGING CONFIG -->
+			<!-- <exclusions>
+				<exclusion>
+				  <groupId>org.springframework.boot</groupId>
+				  <artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			  </exclusions> -->
 			<version>3.1.0</version>
 		</dependency>
 		<dependency>
@@ -136,6 +143,13 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- LOGGING -->
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		  </dependency> -->
+
 	</dependencies>
 	<build>
 		<plugins>

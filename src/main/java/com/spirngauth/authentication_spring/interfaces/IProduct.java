@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface IProduct {
-    List<Products> getAllProduct();
+    ResPayload getAllProduct();
     Optional<String> getProductByname(String name);
     ResPayload loadingPage();
     ResPayload createProduct(RequestProduct req);

@@ -1,5 +1,6 @@
 package com.spirngauth.authentication_spring.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -23,7 +24,7 @@ public class Variants {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "variant_attribute_values", joinColumns = @JoinColumn(name = "variant_attribute_value_id"), inverseJoinColumns = @JoinColumn(name = "attribute_value_id"))
-    private Set<VariantAttributeValues> variantAttributeValueId;
+    private Set<AttributeValues> attributeValues = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
@@ -37,12 +38,12 @@ public class Variants {
         this.id = id;
     }
 
-    public Set<VariantAttributeValues> getVariantAttributeValueId() {
-        return variantAttributeValueId;
+    public Set<AttributeValues> getAttributeValues() {
+        return attributeValues;
     }
 
-    public void setVariantAttributeValueId(Set<VariantAttributeValues> variantAttributeValueId) {
-        this.variantAttributeValueId = variantAttributeValueId;
+    public void setAttributeValues(Set<AttributeValues> attributeValues) {
+        this.attributeValues = attributeValues;
     }
 
     public Products getProductId() {
@@ -52,6 +53,11 @@ public class Variants {
     public void setProductId(Products productId) {
         this.productId = productId;
     }
+
+    
+    
+
+   
 
     
 }

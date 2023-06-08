@@ -21,20 +21,14 @@ public class Products {
     private String SKU;
     private String price;
     private String discount;
-    private Number quantity;
+    private Integer quantity;
     private String status;
     private String shortDescription;
     private String productDescription;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "product_attributes", joinColumns = @JoinColumn(name = "attribute_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Attributes> attributes = new HashSet<>();
-
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Categories categories;
 
     public Long getId() {
         return id;
@@ -76,11 +70,11 @@ public class Products {
         this.discount = discount;
     }
 
-    public Number getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Number quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -108,29 +102,21 @@ public class Products {
         this.productDescription = productDescription;
     }
 
-    public Set<Attributes> getAttributes() {
-        return attributes;
+    public Categories getCategories() {
+        return categories;
     }
 
-    public void setAttributes(Set<Attributes> attributes) {
-        this.attributes = attributes;
+    public void setCategories(Categories categories) {
+        this.categories = categories;
     }
 
-    // public LocalDateTime getCreatedAt() {
-    //     return createdAt;
-    // }
+    // @ManyToOne
+    // // @JoinTable(name = "product_attributes", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "attribute_id"))
+    // @JoinColumn(name = "attribute_id",referencedColumnName = "id")
+    // private Attributes attributes;
 
-    // public void setCreatedAt(LocalDateTime createdAt) {
-    //     this.createdAt = createdAt;
-    // }
-
-    // public LocalDateTime getUpdatedAt() {
-    //     return updatedAt;
-    // }
-
-    // public void setUpdatedAt(LocalDateTime updatedAt) {
-    //     this.updatedAt = updatedAt;
-    // }
+    
+    
 
     
 

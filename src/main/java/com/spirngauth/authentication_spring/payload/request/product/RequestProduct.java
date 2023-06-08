@@ -13,7 +13,25 @@ public class RequestProduct {
     private String status;
     private String price;
     private String discount;
-    private String quatity;
+    private String quantity;
+
+    public RequestProduct() {
+    }
+
+    @Override
+    public String toString() {
+        return "RequestProduct{" +
+                "productName='" + productName + '\'' +
+                ", description='" + description + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", attributes=" + attributes +
+                ", SKU='" + SKU + '\'' +
+                ", status='" + status + '\'' +
+                ", price='" + price + '\'' +
+                ", discount='" + discount + '\'' +
+                ", quantity='" + quantity + '\'' +
+                '}';
+    }
 
     public String getProductName() {
         return productName;
@@ -79,12 +97,13 @@ public class RequestProduct {
         this.discount = discount;
     }
 
-    public String getQuatity() {
-        return quatity;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setQuatity(String quatity) {
-        this.quatity = quatity;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
+   
 }

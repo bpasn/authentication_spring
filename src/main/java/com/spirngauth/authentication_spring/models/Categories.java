@@ -5,9 +5,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 @Entity
+@Table(name = "categories",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "categoryName"),
+        })
 public class Categories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +22,11 @@ public class Categories {
     private String imagePath;
     private Boolean active;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(  name = "product_categories",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Products> product;
+    // @ManyToMany(fetch = FetchType.LAZY)
+    // @JoinTable(  name = "product_categories",
+    //         joinColumns = @JoinColumn(name = "category_id"),
+    //         inverseJoinColumns = @JoinColumn(name = "product_id"))
+    // private Set<Products> product;
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -78,13 +81,13 @@ public class Categories {
         this.active = active;
     }
 
-    public Set<Products> getProduct() {
-        return product;
-    }
+    // public Set<Products> getProduct() {
+    //     return product;
+    // }
 
-    public void setProduct(Set<Products> product) {
-        this.product = product;
-    }
+    // public void setProduct(Set<Products> product) {
+    //     this.product = product;
+    // }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

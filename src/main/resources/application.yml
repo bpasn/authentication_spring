@@ -27,10 +27,16 @@ logging:
     console: "%d %-5level %logger : %msg%n"
     file: "%d %-5level : %msg%n"
   level:
-    ['org.springframework.web']: ERROR
-    ['com.howtodoinjava']: INFO
-    ['org.hibernate']: ERROR
-
+    root: INFO
+    org:
+      springframework:
+        web: ERROR
+      hibernate: ERROR
+    com:
+      howtodoinjava: INFO
+      demo:
+        aop: INFO
+    
 bezkoder:
   app:
     jwtSecret: +VvMvH8Y+/QYlYPHdkXwnO8wkVWpbld94zPohs1goMnFoEqdOGiDjMVBDg9i+wFNi/0de0JfOY0YTw+BfOZm+g==
