@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html 
+layout:decorate="~{layout/master_layout}"
+>
+<head>
+    <div th:replace="fragment:master_layout_head (pageTitle = 'Categories')"></div>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Title</td>
+                        <td>Text</td>
+                        <td>Due to</td>
+                    </tr>
+                </thead>
+                
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

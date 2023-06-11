@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:flagment="~{flagment/header}:: head" />
+
+<body>
+    <div th:flagment="~{flagment/header}:: header"></div>
+    <div layout:fragment="content">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Welcome to Our Site</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur [....]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script th:src="@{/js/page-content.js}"></script>
+   
+</body>
+
+</html>

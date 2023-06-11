@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:flagment="heade">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <link th:href="@{/bootstrap-5.3.0/dist/css/bootstrap.css}" rel="stylesheet">
+        </link>
+        <link th:href="@{/bootstrap-5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet">
+        </link>
+        <link th:href="@{/bootstrap-5.3.0/dist/css/bootstrap.rtl.min.css}" rel="stylesheet">
+        </link>
+        <link th:href="@{/bootstrap-5.3.0/dist/css/bootstrap.rtl.css}" rel="stylesheet">
+        </link>
+    
+        <link th:href="@{/css/index.css}" rel="stylesheet">
+        </link>
+        <link th:href="@{/sidebar/css/style.css}" rel="stylesheet">
+        <link th:href="@{/sidebar/css/bootstrap.min.css}" rel="stylesheet">
+        <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
+    
+    </head>
+<body>
+    <div class="mnb navbar navbar-default navbar-fixed-top" th:flagment="header">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div style="padding: 15px 0;">
+                    <a href="#" id="msbo"><i class="ic fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--msb: main sidebar-->
+    <div class="msb bg-dark" id="msb" th:flagment="header">
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <div class="brand-wrapper">
+                    <!-- Brand -->
+                    <div class="brand-name-wrapper">
+                        <a class="navbar-brand" href="#">
+                            SAITAMA
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Main Menu -->
+            <div class="side-menu-container">
+                <ul class="nav navbar-nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a layout:href="@{/webportal}" class="nav-link active text-white">
+                            <span>
+                                <i class="fa-solid fa-gauge mr-4"></i>
+                                Dashboard
+                            </span>
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/webportal/categories" layout:href="@{/webportal/categories}"
+                            class="nav-link  text-white">
+                            <span>
+                                <i class="fa-solid fa-list mr-4"></i>
+                                Categories
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-white" aria-current="page">
+                            <span>
+                                <i class="fa-solid fa-house mr-4"></i>
+                                Home
+                            </span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-white">
+                            <i class="fa-brands fa-product-hunt mr-4"></i>
+                            Products
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</body>
+
+</html>

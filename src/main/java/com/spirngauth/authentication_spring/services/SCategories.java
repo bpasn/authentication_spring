@@ -2,13 +2,13 @@ package com.spirngauth.authentication_spring.services;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.NestedExceptionUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.spirngauth.authentication_spring.interfaces.ICategories;
+import com.spirngauth.authentication_spring.services.interfaces.ICategories;
 import com.spirngauth.authentication_spring.models.Categories;
 import com.spirngauth.authentication_spring.payload.request.categories.ReqCategory;
 import com.spirngauth.authentication_spring.payload.response.BaseResponse;
@@ -34,7 +34,8 @@ public class SCategories implements ICategories {
     }
 
     @Override
-    public BaseResponse createCategories(ReqCategory req) throws FileNotFoundException, IOException, Exception{
+    public BaseResponse createCategories(ReqCategory req)
+            throws FileNotFoundException, IOException, Exception {
         String pathFile = createImagesService.createImage(req.getImagePath());
         Categories categories = new Categories();
         categories.setActive(true);

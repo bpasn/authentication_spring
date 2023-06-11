@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spirngauth.authentication_spring.ErrorHandler;
+import com.spirngauth.authentication_spring.config.ErrorHandler;
 import com.spirngauth.authentication_spring.models.ErrorResponse;
 import com.spirngauth.authentication_spring.payload.request.categories.ReqCategory;
 import com.spirngauth.authentication_spring.payload.response.BaseResponse;

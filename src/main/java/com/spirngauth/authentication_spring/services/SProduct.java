@@ -1,6 +1,6 @@
 package com.spirngauth.authentication_spring.services;
 
-import com.spirngauth.authentication_spring.interfaces.IProduct;
+import com.spirngauth.authentication_spring.services.interfaces.IProduct;
 import com.spirngauth.authentication_spring.models.AttributeValues;
 import com.spirngauth.authentication_spring.models.Attributes;
 import com.spirngauth.authentication_spring.models.Products;

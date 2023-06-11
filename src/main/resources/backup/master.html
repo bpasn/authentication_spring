@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    <title th:text="${pageTitle}">Default Page Title</title>
+</head>
+<body>
+    <div th:replace="_layout :: header"></div>
+    <div th:replace="_layout :: content"></div>
+    <!-- <div th:replace="fragments/footer :: footer"></div> -->
+</body>
+</html>
