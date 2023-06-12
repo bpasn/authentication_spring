@@ -34,16 +34,18 @@ public class SCategories implements ICategories {
     }
 
     @Override
-    public BaseResponse createCategories(ReqCategory req)
-            throws FileNotFoundException, IOException, Exception {
-        String pathFile = createImagesService.createImage(req.getImagePath());
-        Categories categories = new Categories();
-        categories.setActive(true);
-        categories.setCategoryDescription(req.getCategoryDescription());
-        categories.setCategoryName(req.getCategoryName());
-        categories.setImagePath(pathFile);
-        categoriesRepo.save(categories);
-        return response(true);
+    public BaseResponse createCategories(ReqCategory req) throws FileNotFoundException, IOException, Exception {
+        if (categoriesRepo.findByCategoryName(req.getCategoryName()).isEmpty()) {
+            String pathFile = createImagesService.createImage(req.getImagePath());
+            Categories categories = new Categories();
+            categories.setActive(req.getActive());
+            categories.setCategoryDescription(req.getCategoryDescription());
+            categories.setCategoryName(req.getCategoryName());
+            categories.setImagePath(pathFile.toString());
+            categoriesRepo.save(categories);
+            return response(true);
+        }
+        return response(false, String.format("Category Name : %s is Already exists", req.getCategoryName()));
     }
 
     @Override

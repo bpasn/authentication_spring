@@ -20,7 +20,7 @@ public class Categories {
     private String categoryDescription;
     private String icon;
     private String imagePath;
-    private Boolean active;
+    private String active;
 
     // @ManyToMany(fetch = FetchType.LAZY)
     // @JoinTable(  name = "product_categories",
@@ -73,11 +73,11 @@ public class Categories {
         this.imagePath = imagePath;
     }
 
-    public Boolean getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(String active) {
         this.active = active;
     }
 

@@ -7,7 +7,7 @@ public class ReqCategory {
     private String categoryDescription;
     private String icon;
     private MultipartFile imagePath;
-    private Boolean active;
+    private String active;
 
     public String getCategoryName() {
         return categoryName;
@@ -41,11 +41,11 @@ public class ReqCategory {
         this.imagePath = imagePath;
     }
 
-    public Boolean getActive() {
+    public String getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(String active) {
         this.active = active;
     }
 

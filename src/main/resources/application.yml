@@ -6,7 +6,7 @@ server:
 spring:
   # web:
   #    resources:
-        # static-locations: classpath:/files/,classpath:/static-files,classpath:/bootstrap
+  #       static-locations: classpath:/storage/,classpath:/categories/
   mvc:
     static-path-pattern: /**
     # view:
@@ -27,6 +27,7 @@ spring:
     timeBetweenEvictionRunsMillis: 5000
     minEvictableIdleTimeMillis: 5000
     minIdle: 0
+    driverClassName: com.mysql.cj.jdbc.Driver
     
   jpa:
     show-sql: true
@@ -35,9 +36,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
         # dialect: org.hibernate.dialect.MySQLDialect
         hbm2ddl:
-          auto: none
+          auto: update # when start u need to create table u can change the value as an create or update 
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
       naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
   sql:
     init:
