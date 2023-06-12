@@ -11,4 +11,5 @@ import com.spirngauth.authentication_spring.models.RoleModel;
 
 public interface RoleRepository extends JpaRepository<RoleModel,String> {
     Optional<RoleModel> findByName(ERole name);
+    Optional<RoleModel> findByName(String name);
 }
