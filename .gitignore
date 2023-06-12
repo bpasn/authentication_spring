@@ -37,5 +37,6 @@ docker/mysql
 docker/mysql-ecommerce
 logger
 logger/*
+src/main/resources/storage
 *.log
 .fake
