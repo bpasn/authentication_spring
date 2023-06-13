@@ -71,7 +71,7 @@ public class CommandlindRunner implements CommandLineRunner {
                 value.forEach((String val) -> {
                     AttributeValues attrv = new AttributeValues();
                     attrv.setAttributeValue(val);
-                    attrv.setAttributeId(atts);
+                    attrv.setAttributeId(atts.getId());
                     attributeValueRepo.save(attrv);
 
                 });

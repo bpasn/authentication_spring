@@ -2,14 +2,10 @@ package com.spirngauth.authentication_spring.services;
 
 import com.spirngauth.authentication_spring.services.interfaces.IProduct;
 
-
 import com.spirngauth.authentication_spring.models.AttributeValues;
 import com.spirngauth.authentication_spring.models.Attributes;
 import com.spirngauth.authentication_spring.models.Categories;
 import com.spirngauth.authentication_spring.models.Products;
-import com.spirngauth.authentication_spring.models.VariantValues;
-import com.spirngauth.authentication_spring.models.Variants;
-import com.spirngauth.authentication_spring.payload.request.product.Attribute;
 import com.spirngauth.authentication_spring.payload.request.product.RequestProduct;
 import com.spirngauth.authentication_spring.payload.response.ResPayload;
 import com.spirngauth.authentication_spring.repository.AttributeRepo;
@@ -36,6 +32,7 @@ public class SProduct implements IProduct {
 
     @Autowired
     private AttributeRepo attributeRepo;
+    
     @Autowired
     private VariantsRepo variantsRepo;
 
@@ -86,22 +83,21 @@ public class SProduct implements IProduct {
         nProducts.setShortDescription(req.getShortDescription());
         nProducts.setPrice(req.getPrice());
         nProducts.setStatus(req.getStatus());
+        nProducts.setDiscount(req.getDiscount());
         nProducts.setQuantity(Integer.parseInt(req.getQuantity()));
 
-        Set<Attributes> attributes = new HashSet<>();
+        Set<Attributes> sAttributes = new HashSet<>();
+
         req.getAttributes().forEach(attribute -> {
             Set<AttributeValues> attributeValues = new HashSet<>();
             Attributes nAttribute = attributeRepo.findByAttributeName(attribute.getName())
                     .orElseThrow(() -> new RuntimeException("Not Found Attribute Name"));
-            AttributeValues nAttributeValue = attributeValueRepo
-                    .findByAttributeValueAndAttributeId(attribute.getValue(), nAttribute)
-                    .orElseThrow(() -> new RuntimeException("Not Found Attribute Value"));
-            attributeValues.add(nAttributeValue);
-
+            AttributeValues gAttributeV = attributeValueRepo.findAllByAttributeIdAndAttributeValue(nAttribute.getId(), attribute.getValue());
+            attributeValues.add(gAttributeV);
             nAttribute.setAttributeValues(attributeValues);
-            attributes.add(nAttribute);
+            sAttributes.add(nAttribute);
         });
-        nProducts.setAttributes(attributes);
+        nProducts.setAttributes(sAttributes);
         nProducts.setCategories(nCategories);
 
         nProducts.setSKU(generateSKU(nProducts));
@@ -124,7 +120,7 @@ public class SProduct implements IProduct {
             });
         });
         FieldCount count = productRepo.countProducts();
-        skuBuilder.append("-"+count.getSku());
+        skuBuilder.append("-" + count.getSku());
         return skuBuilder.toString();
     }
 
@@ -143,7 +139,7 @@ public class SProduct implements IProduct {
 
     public Map<String, Object> setAttribute(Attributes attribute) {
         Map<String, Object> mapAttribute = new HashMap<>();
-        List<AttributeValues> attVal = attributeValueRepo.findAllByAttributeId(attribute);
+        List<AttributeValues> attVal = attributeValueRepo.findAllByAttributeId(attribute.getId());
         List<HashMap<String, String>> map = new ArrayList<>();
         attVal.forEach((AttributeValues val) -> {
             HashMap<String, String> valueMap = new HashMap<>();

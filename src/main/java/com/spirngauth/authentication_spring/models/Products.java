@@ -31,8 +31,8 @@ public class Products {
     private String shortDescription;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER,targetEntity = Attributes.class)
-   @JoinTable(name = "product_attribute", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "attribute_id"))
+    @ManyToMany(fetch = FetchType.LAZY,targetEntity = Attributes.class)
+    @JoinTable(name = "product_attribute", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "attribute_id"))
     private Set<Attributes> attributes = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER,targetEntity = Categories.class)

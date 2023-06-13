@@ -8,12 +8,12 @@ public class AttributeValues {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attribute_id")
-    private Attributes attributeId;
+    
 
     private String attributeValue;
+
+    @JoinColumn(name = "attribute_id",referencedColumnName = "id")
+    private Long attributeId;
 
     public Long getId() {
         return id;
@@ -21,14 +21,6 @@ public class AttributeValues {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Attributes getAttributeId() {
-        return attributeId;
-    }
-
-    public void setAttributeId(Attributes attributeId) {
-        this.attributeId = attributeId;
     }
 
     public String getAttributeValue() {
@@ -43,8 +35,15 @@ public class AttributeValues {
     public String toString() {
         return "AttributeValues{" +
                 "id=" + id +
-                ", attributeId=" + attributeId +
                 ", attributeValue='" + attributeValue + '\'' +
                 '}';
+    }
+
+    public Long getAttributeId() {
+        return attributeId;
+    }
+
+    public void setAttributeId(Long attributeId) {
+        this.attributeId = attributeId;
     }
 }

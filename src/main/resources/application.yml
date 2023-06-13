@@ -35,10 +35,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
         # dialect: org.hibernate.dialect.MySQLDialect
-        # hbm2ddl:
-        #   auto: create # when start u need to create table u can change the value as an create or update 
+        hbm2ddl:
+          auto: update # when start u need to create table u can change the value as an create or update 
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
   sql:
     init:

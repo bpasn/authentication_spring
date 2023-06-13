@@ -29,6 +29,7 @@ public class Attributes {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "attribute_to_attribute_value", joinColumns = @JoinColumn(name = "attribute_id"), inverseJoinColumns = @JoinColumn(name = "attribute_value_id"))
     private Set<AttributeValues> attributeValues = new HashSet<>();
+    
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -49,22 +50,6 @@ public class Attributes {
 
     public void setAttributeName(String attributeName) {
         this.attributeName = attributeName;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     @Override

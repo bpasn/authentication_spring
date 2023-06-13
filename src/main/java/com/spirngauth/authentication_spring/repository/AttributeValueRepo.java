@@ -13,8 +13,9 @@ public interface AttributeValueRepo extends JpaRepository<AttributeValues,Long>{
     // @Query("""
     //         SELECT * from attribute_value where :attribute_id 
     //         """)
-    List<AttributeValues> findAllByAttributeId( Attributes attributeId);
-    AttributeValues findByAttributeId(Attributes attributesId);
+    List<AttributeValues> findAllByAttributeId( Long attributeId);
+    AttributeValues findAllByAttributeIdAndAttributeValue( Long attributeId,String attributeValueName);
+    // AttributeValues findByAttributeId(Attributes attributesId);
     // @Query("SELECT * FROM attribute_value where attribute_name = ?1 and attribute_id = ?1")
-    Optional<AttributeValues> findByAttributeValueAndAttributeId(String attributeValue,Attributes attributes);
+    // Optional<AttributeValues> findByAttributeValueAndAttributeId(String attributeValue,Attributes attributes);
 }
