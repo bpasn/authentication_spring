@@ -1,11 +1,9 @@
 package com.spirngauth.authentication_spring.config;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -22,14 +20,11 @@ import com.spirngauth.authentication_spring.models.ERole;
 import com.spirngauth.authentication_spring.models.ListMenu;
 import com.spirngauth.authentication_spring.models.Menus;
 import com.spirngauth.authentication_spring.models.RoleModel;
-import com.spirngauth.authentication_spring.models.SubMenus;
 import com.spirngauth.authentication_spring.repository.AttributeRepo;
 import com.spirngauth.authentication_spring.repository.AttributeValueRepo;
 import com.spirngauth.authentication_spring.repository.ListMenuRepo;
 import com.spirngauth.authentication_spring.repository.MenuRepo;
 import com.spirngauth.authentication_spring.repository.RoleRepository;
-
-import lombok.val;
 
 @Configuration
 public class CommandlindRunner implements CommandLineRunner {
@@ -54,6 +49,15 @@ public class CommandlindRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if (roleRepository.findAll().isEmpty()) {
+            List<RoleModel> role = List.of(
+                    new RoleModel(ERole.ROLE_ADMIN),
+                    new RoleModel(ERole.ROLE_MODERATOR),
+                    new RoleModel(ERole.ROLE_USER)
+
+            );
+            roleRepository.saveAll(role);
+        }
         if (attributeRepo.findAll().isEmpty() &&
                 attributeValueRepo.findAll().isEmpty()) {
             TypeReference<HashMap<String, List<String>>> typeReference = new TypeReference<HashMap<String, List<String>>>() {
@@ -88,7 +92,7 @@ public class CommandlindRunner implements CommandLineRunner {
                 List<HashMap<String, Object>> submenu = (List) item.get("subMenus");
                 submenu.forEach(sub -> {
 
-                    List<String> roles = (List) sub.get("roles");
+                    List<String> roles = (List<String>) sub.get("roles");
                     Set<RoleModel> sRole = new HashSet<>();
                     ListMenu glistMenu = new ListMenu();
                     roles.forEach(_role -> {

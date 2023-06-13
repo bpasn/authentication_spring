@@ -1,6 +1,5 @@
 package com.spirngauth.authentication_spring.payload.request.product;
 
-import java.util.List;
 
 public class Attribute {
     private String name;

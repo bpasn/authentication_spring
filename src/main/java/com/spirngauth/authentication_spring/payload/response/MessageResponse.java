@@ -4,7 +4,6 @@ package com.spirngauth.authentication_spring.payload.response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.spirngauth.authentication_spring.models.ECode;
 
 public class MessageResponse extends ResponseEntityExceptionHandler {
     private String message;

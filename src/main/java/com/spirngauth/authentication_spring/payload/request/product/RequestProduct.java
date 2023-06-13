@@ -1,14 +1,18 @@
 package com.spirngauth.authentication_spring.payload.request.product;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+
 
 public class RequestProduct {
+    public interface Category{
+    public String getAttributeName();
+}
     private String productName;
     private String description;
     private String shortDescription;
     private List<Attribute> attributes;
+    private String categoryName;
     private String SKU;
     private String status;
     private String price;
@@ -65,6 +69,14 @@ public class RequestProduct {
         this.attributes = attributes;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCagegoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public String getSKU() {
         return SKU;
     }
@@ -105,5 +117,6 @@ public class RequestProduct {
         this.quantity = quantity;
     }
 
+    
    
 }

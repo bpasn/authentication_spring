@@ -18,13 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping(path = "/api/product")
+@RequestMapping(path = "/api/products")
 @SecurityRequirement(name = "bearerAuth")
 public class ProductController {
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -36,14 +33,14 @@ public class ProductController {
         return ResponseEntity.ok(sProduct.loadingPage());
     }
 
-    @PostMapping(value = "/post")
+    @PostMapping(value = "/create")
     public ResponseEntity<ResPayload> postProduct(@Valid @RequestBody RequestProduct product) {
         logger.info(product.toString());
         return ResponseEntity.ok(sProduct.createProduct(product));
     }
 
     @GetMapping("get")
-    public ResponseEntity<ResPayload> getProduct() {
+    public ResponseEntity<?> getProduct() {
         return ResponseEntity.ok(sProduct.getAllProduct());
     }
 

@@ -1,8 +1,11 @@
 package com.spirngauth.authentication_spring.services;
 
 import com.spirngauth.authentication_spring.services.interfaces.IProduct;
+
+
 import com.spirngauth.authentication_spring.models.AttributeValues;
 import com.spirngauth.authentication_spring.models.Attributes;
+import com.spirngauth.authentication_spring.models.Categories;
 import com.spirngauth.authentication_spring.models.Products;
 import com.spirngauth.authentication_spring.models.VariantValues;
 import com.spirngauth.authentication_spring.models.Variants;
@@ -11,9 +14,13 @@ import com.spirngauth.authentication_spring.payload.request.product.RequestProdu
 import com.spirngauth.authentication_spring.payload.response.ResPayload;
 import com.spirngauth.authentication_spring.repository.AttributeRepo;
 import com.spirngauth.authentication_spring.repository.AttributeValueRepo;
+import com.spirngauth.authentication_spring.repository.CategoriesRepo;
 import com.spirngauth.authentication_spring.repository.ProductRepo;
+import com.spirngauth.authentication_spring.repository.ProductRepo.FieldCount;
 import com.spirngauth.authentication_spring.repository.VariantsRepo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +28,9 @@ import java.util.*;
 
 @Service("sProduct")
 public class SProduct implements IProduct {
+
+    private static final Logger logger = LoggerFactory.getLogger(SProduct.class);
+
     @Autowired
     private ProductRepo productRepo;
 
@@ -32,16 +42,19 @@ public class SProduct implements IProduct {
     @Autowired
     private AttributeValueRepo attributeValueRepo;
 
+    @Autowired
+    private CategoriesRepo categoriesRepo;
     // private static Logger logger = LoggerFactory.getLogger(SProduct.class);
 
     public static final String message = "Product Controller";
 
     @Override
-    public ResPayload getAllProduct() {
+    public List<Products> getAllProduct() {
         ResPayload response = new ResPayload();
+        List<Products> products = productRepo.findAll();
         response.setSuccess(true);
-        response.setPayload(productRepo.findAll());
-        return response;
+        response.setPayload(products.toArray());
+        return products;
     }
 
     @Override
@@ -63,43 +76,56 @@ public class SProduct implements IProduct {
 
     @Override
     public ResPayload createProduct(RequestProduct req) {
-        ResPayload resPayload = new ResPayload();
-        Variants variants = new Variants();
-        Set<VariantValues> variantVal = new HashSet<>();
-        Products product = new Products();
 
-        List<Attribute> gAttr = req.getAttributes();
-        Set<Attributes> sAttr = new HashSet<>();
+        Products nProducts = new Products();
+        Categories nCategories = categoriesRepo.findByCategoryName(req.getCategoryName())
+                .orElseThrow(() -> new RuntimeException("Not Found  Category Name"));
 
-        gAttr.forEach((Attribute attr) -> {
-            Attributes _attr = attributeRepo.findByAttributeName(attr.getName())
-                    .orElseThrow(() -> new RuntimeException("Attribute Name Not Found!"));
-            sAttr.add(_attr);
+        nProducts.setProductName(req.getProductName());
+        nProducts.setDescription(req.getDescription());
+        nProducts.setShortDescription(req.getShortDescription());
+        nProducts.setPrice(req.getPrice());
+        nProducts.setStatus(req.getStatus());
+        nProducts.setQuantity(Integer.parseInt(req.getQuantity()));
+
+        Set<Attributes> attributes = new HashSet<>();
+        req.getAttributes().forEach(attribute -> {
+            Set<AttributeValues> attributeValues = new HashSet<>();
+            Attributes nAttribute = attributeRepo.findByAttributeName(attribute.getName())
+                    .orElseThrow(() -> new RuntimeException("Not Found Attribute Name"));
+            AttributeValues nAttributeValue = attributeValueRepo
+                    .findByAttributeValueAndAttributeId(attribute.getValue(), nAttribute)
+                    .orElseThrow(() -> new RuntimeException("Not Found Attribute Value"));
+            attributeValues.add(nAttributeValue);
+
+            nAttribute.setAttributeValues(attributeValues);
+            attributes.add(nAttribute);
         });
-        // product.setProductName(req.getProductName());
-        // product.setDiscount(req.getDiscount());
-        // product.setPrice(req.getPrice());
-        // product.setProductDescription(req.getDescription());
-        // product.setShortDescription(req.getShortDescription());
-        // product.setSKU(req.getSKU());
-        // product.setStatus(req.getStatus());
-        // product.setQuantity(Integer.parseInt(req.getQuantity()));
-        // product.setAttributes(sAttr);
-        productRepo.save(product);
-        Set<AttributeValues> sAttrVal = new HashSet<>();
-        gAttr.forEach(attr -> {
-            Attributes attributes = attributeRepo.findByAttributeName(attr.getName())
-                    .orElseThrow(() -> new RuntimeException("Attribute Name Not Found"));
-            AttributeValues attributeValues = attributeValueRepo
-                    .findByAttributeValueAndAttributeId(attr.getValue(), attributes)
-                    .orElseThrow(() -> new RuntimeException("Attribute Value Not Found"));
-            sAttrVal.add(attributeValues);
-        });
-        variants.setProductId(product);
-        variants.setAttributeValues(sAttrVal);
-        variantsRepo.save(variants);
+        nProducts.setAttributes(attributes);
+        nProducts.setCategories(nCategories);
 
-        return resPayload;
+        nProducts.setSKU(generateSKU(nProducts));
+        productRepo.save(nProducts);
+
+        return response(true, "Product Create Successfully !");
+    }
+
+    @Override
+    public String generateSKU(Products product) {
+        String category = product.getCategories().getCategoryName().substring(0, 3).toUpperCase();
+        StringBuilder skuBuilder = new StringBuilder();
+        skuBuilder.append(category);
+
+        product.getAttributes().forEach(item -> {
+            item.getAttributeValues().forEach(value -> {
+                String v = value.getAttributeValue().length() > 4 ? value.getAttributeValue().substring(0, 2)
+                        : value.getAttributeValue().substring(0, 1);
+                skuBuilder.append("-" + item.getAttributeName().substring(0, 3) + v);
+            });
+        });
+        FieldCount count = productRepo.countProducts();
+        skuBuilder.append("-"+count.getSku());
+        return skuBuilder.toString();
     }
 
     public ResPayload response(Boolean flg, Object payload) {

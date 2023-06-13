@@ -2,10 +2,6 @@ package com.spirngauth.authentication_spring.config;
 
 
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.http.HttpHeaders;
-import java.sql.SQLException;
 import java.util.Date;
 
 import com.spirngauth.authentication_spring.models.ErrorDetail;
@@ -18,17 +14,9 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import com.spirngauth.authentication_spring.models.ApiError;
-import com.spirngauth.authentication_spring.models.ErrorResponse;
-import com.spirngauth.authentication_spring.payload.response.BaseResponse;
-
-import javax.naming.AuthenticationException;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice

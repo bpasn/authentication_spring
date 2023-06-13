@@ -1,6 +1,5 @@
 package com.spirngauth.authentication_spring.payload.response;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ResponseMessage {

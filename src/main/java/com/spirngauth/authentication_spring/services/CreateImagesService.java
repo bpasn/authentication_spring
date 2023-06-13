@@ -1,5 +1,6 @@
 package com.spirngauth.authentication_spring.services;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -80,7 +81,7 @@ public class CreateImagesService {
         } catch (IOException io) {
             throw new IOException("Could not save file: " + filename, io);
         }
-        return fullPath.toString();
+        return fullPath.toString().replace(File.separator, "/");
 
     }
 

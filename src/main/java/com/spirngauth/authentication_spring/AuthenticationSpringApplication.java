@@ -19,22 +19,6 @@ import java.util.Collections;
 @EnableConfigurationProperties
 
 @SpringBootApplication
-// @OpenAPIDefinition(
-// 		info = @Info(
-// 				title = "Hello World",
-// 				version = "1.0.0",
-// 				description = "This project is only for leaning",
-// 				termsOfService = "runcodenow"
-// 				// contact = @Contact(
-// 				// 		name = "admin",
-// 				// 		email = "spring_root@email.com"
-// 				// ),
-// 				// license = @License(
-// 				// 		name = "licence",
-// 				// 		url = "runcodenow"
-// 				// )
-// 		)
-// )
 @OpenAPIDefinition(info = @Info(title = "My API", version = "v1"))
 @SecurityScheme(
     name = "bearerAuth",
@@ -55,20 +39,6 @@ public class AuthenticationSpringApplication {
 		app.run();
 	}
 
-	// Create role
-//	 @Bean
-//	 public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
-//
-//	 	return args -> {
-//	 		List<RoleModel> role = List.of(
-//	 				new RoleModel(ERole.ROLE_ADMIN),
-//	 				new RoleModel(ERole.ROLE_MODERATOR),
-//	 				new RoleModel(ERole.ROLE_USER)
-//
-//	 		);
-//	 		roleRepository.saveAll(role);
-//	 	};
-//	 }
 
 
 }
