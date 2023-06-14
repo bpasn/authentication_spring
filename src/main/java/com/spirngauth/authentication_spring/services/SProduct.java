@@ -46,12 +46,12 @@ public class SProduct implements IProduct {
     public static final String message = "Product Controller";
 
     @Override
-    public List<Products> getAllProduct() {
+    public ResPayload getAllProduct() {
         ResPayload response = new ResPayload();
         List<Products> products = productRepo.findAll();
         response.setSuccess(true);
         response.setPayload(products.toArray());
-        return products;
+        return response;
     }
 
     @Override

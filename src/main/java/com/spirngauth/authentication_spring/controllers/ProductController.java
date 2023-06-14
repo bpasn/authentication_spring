@@ -39,8 +39,8 @@ public class ProductController {
         return ResponseEntity.ok(sProduct.createProduct(product));
     }
 
-    @GetMapping("get")
-    public ResponseEntity<?> getProduct() {
+    @GetMapping("get-all")
+    public ResponseEntity<ResPayload> getProduct() {
         return ResponseEntity.ok(sProduct.getAllProduct());
     }
 

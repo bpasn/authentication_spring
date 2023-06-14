@@ -18,6 +18,7 @@ import com.spirngauth.authentication_spring.payload.response.ResPayload;
 import com.spirngauth.authentication_spring.services.SCategories;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -32,7 +33,7 @@ public class CategoriesController {
     }
     // , consumes = "multipart/form-data",produces = {"application/json"}
     @PostMapping(value = "create")
-    public ResponseEntity<?> createCategories(@RequestBody ReqCategory req) throws FileNotFoundException, IOException, Exception{
+    public ResponseEntity<?> createCategories(@Valid @RequestBody ReqCategory req) throws FileNotFoundException, IOException, Exception{
         if(req.getImagePath() == null){
             return  ResponseEntity.badRequest().body(new ErrorResponse(HttpStatus.BAD_REQUEST,"Image Is Require"));
         }
