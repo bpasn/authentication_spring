@@ -35,9 +35,11 @@ public class Products {
     @JoinTable(name = "product_attribute", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "attribute_id"))
     private Set<Attributes> attributes = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER,targetEntity = Categories.class)
-    @JoinColumn(name="categories_id")
-    private Categories categories;
+    @JoinColumn(name = "categories_id",referencedColumnName = "id")
+    private Long categoriesId;
+//    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER,targetEntity = Categories.class)
+//    @JoinColumn(name="categories_id")
+//    private Categories categories;
 
     public Long getId() {
         return id;
@@ -120,12 +122,20 @@ public class Products {
         this.attributes = attributes;
     }
 
-    public Categories getCategories() {
-        return categories;
+    public Long getCategoriesId() {
+        return categoriesId;
     }
 
-    public void setCategories(Categories categories) {
-        this.categories = categories;
+    public void setCategoriesId(Long categoriesId) {
+        this.categoriesId = categoriesId;
     }
+
+    //    public Categories getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(Categories categories) {
+//        this.categories = categories;
+//    }
 
 }

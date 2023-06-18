@@ -1,7 +1,6 @@
 package com.spirngauth.authentication_spring.services;
 
-import com.spirngauth.authentication_spring.services.interfaces.IProduct;
-
+import com.spirngauth.authentication_spring.interfaces.IProduct;
 import com.spirngauth.authentication_spring.models.AttributeValues;
 import com.spirngauth.authentication_spring.models.Attributes;
 import com.spirngauth.authentication_spring.models.Categories;
@@ -48,7 +47,7 @@ public class SProduct implements IProduct {
     @Override
     public ResPayload getAllProduct() {
         ResPayload response = new ResPayload();
-        List<Products> products = productRepo.findAll();
+        List<ProductRepo.FieldProductCate> products = productRepo.products();
         response.setSuccess(true);
         response.setPayload(products.toArray());
         return response;
@@ -98,7 +97,7 @@ public class SProduct implements IProduct {
             sAttributes.add(nAttribute);
         });
         nProducts.setAttributes(sAttributes);
-        nProducts.setCategories(nCategories);
+        nProducts.setCategoriesId(nCategories.getId());
 
         nProducts.setSKU(generateSKU(nProducts));
         productRepo.save(nProducts);
@@ -108,7 +107,7 @@ public class SProduct implements IProduct {
 
     @Override
     public String generateSKU(Products product) {
-        String category = product.getCategories().getCategoryName().substring(0, 3).toUpperCase();
+        String category = categoriesRepo.findById(product.getCategoriesId()).get().getCategoryName().substring(0, 3).toUpperCase();
         StringBuilder skuBuilder = new StringBuilder();
         skuBuilder.append(category);
 

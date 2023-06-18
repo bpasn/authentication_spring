@@ -7,10 +7,11 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spirngauth.authentication_spring.services.interfaces.ICategories;
+import com.spirngauth.authentication_spring.utils.CreateImagesService;
 
 import io.swagger.models.Path;
 
+import com.spirngauth.authentication_spring.interfaces.ICategories;
 import com.spirngauth.authentication_spring.models.Categories;
 import com.spirngauth.authentication_spring.payload.request.categories.ReqCategory;
 import com.spirngauth.authentication_spring.payload.response.BaseResponse;

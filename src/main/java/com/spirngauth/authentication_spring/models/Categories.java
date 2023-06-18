@@ -16,6 +16,8 @@ public class Categories {
     private Long id;
 
     private String categoryName;
+
+    @Column(columnDefinition = "longtext")
     private String categoryDescription;
     private String icon;
     private String imagePath;

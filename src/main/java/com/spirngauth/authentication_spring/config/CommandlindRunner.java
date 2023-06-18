@@ -68,13 +68,16 @@ public class CommandlindRunner implements CommandLineRunner {
                 Attributes atts = new Attributes();
                 atts.setAttributeName(key);
                 attributeRepo.save(atts);
+                Set<AttributeValues> sAttributesValue = new HashSet<>();
                 value.forEach((String val) -> {
                     AttributeValues attrv = new AttributeValues();
                     attrv.setAttributeValue(val);
                     attrv.setAttributeId(atts.getId());
-                    attributeValueRepo.save(attrv);
-
+                    sAttributesValue.add(attrv);
                 });
+                attributeValueRepo.saveAll(sAttributesValue);
+                atts.setAttributeValues(sAttributesValue);
+                attributeRepo.save(atts);
             });
         }
         if (menuRepo.findAll().isEmpty() && listMenuRepo.findAll().isEmpty()) {
@@ -91,7 +94,6 @@ public class CommandlindRunner implements CommandLineRunner {
                 Set<ListMenu> sListMenu = new HashSet<>();
                 List<HashMap<String, Object>> submenu = (List) item.get("subMenus");
                 submenu.forEach(sub -> {
-
                     List<String> roles = (List<String>) sub.get("roles");
                     Set<RoleModel> sRole = new HashSet<>();
                     ListMenu glistMenu = new ListMenu();
@@ -100,7 +102,6 @@ public class CommandlindRunner implements CommandLineRunner {
                                 .orElseThrow(() -> new RuntimeException("ROLE NOT FOUND"));
                         sRole.add(roleModel);
                     });
-
                     glistMenu.setMenuName(sub.get("name").toString());
                     glistMenu.setMenuUrl(sub.get("url").toString());
                     glistMenu.setRoles(sRole);

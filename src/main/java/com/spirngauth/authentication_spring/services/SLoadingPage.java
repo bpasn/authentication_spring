@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spirngauth.authentication_spring.interfaces.ILoadingPage;
 import com.spirngauth.authentication_spring.models.Menus;
 import com.spirngauth.authentication_spring.payload.response.ResPayload;
 import com.spirngauth.authentication_spring.repository.ListMenuRepo;
 import com.spirngauth.authentication_spring.repository.MenuRepo;
-import com.spirngauth.authentication_spring.services.interfaces.ILoadingPage;
 
 @Service
 public class SLoadingPage implements ILoadingPage{
