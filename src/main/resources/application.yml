@@ -4,20 +4,11 @@ app:
 server:
   port: 8888
 spring:
-  # web:
-  #    resources:
-  #       static-locations: classpath:/storage/,classpath:/categories/
-  mvc:
-    static-path-pattern: /**
-    # view:
-    #   prefix: /WEB-INF/
-      # suffix: .jsp
-#  data:
-#    mongodb:
-#      uri: mongodb://spring_user:1234@localhost:27018/spring_db
-#      database: spring_db
-#    autoconfigure:
-#      exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  thymeleaf: # Thymeleaf
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    prefix: file:src/main/resources/templates/
   datasource:
     url: jdbc:mysql://localhost:3300/spring_db?useSSL=false
     username: admin
@@ -43,6 +34,35 @@ spring:
   sql:
     init:
       continue-on-error: true
+  web:
+    resources:
+      resource-locations: "classpath:/storage/"
+      static-locations: file:src/main/resources/static/,file:src/main/storage/
+      cache:
+        period: 0
+
+        #  data:
+
+        #    mongodb:
+
+        #      uri: mongodb://spring_user:1234@localhost:27018/spring_db
+
+        #      database: spring_db
+
+        #    autoconfigure:
+
+        #      exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  # web:
+  #   resources:
+  #     static-locations: file:/src/main/resources/static/
+  #     cache:
+  #       period: 0
+
+        # web:
+
+        #    resources:
+
+        #       static-locations: classpath:/storage/,classpath:/categories/
 logging:
   file: 
     name: src/main/resources/storage/logger/application-debug.log

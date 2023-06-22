@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.spirngauth.authentication_spring.provider.CustomAuthenticationProvider;
 import com.spirngauth.authentication_spring.security.jwt.AuthEntryPointJwt;
 import com.spirngauth.authentication_spring.security.jwt.AuthTokenFilter;
-import com.spirngauth.authentication_spring.security.services.UserDetailsServiceImpl;
+import com.spirngauth.authentication_spring.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableMethodSecurity

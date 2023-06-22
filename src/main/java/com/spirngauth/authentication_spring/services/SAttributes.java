@@ -38,6 +38,7 @@ public class SAttributes implements IAttributes{
             mapOp.put("id",item.getId());
             sAttribute.add(mapOp);
         });
+
         response.setPayload(sAttribute);
         return response;
     }

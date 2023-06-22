@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.spirngauth.authentication_spring.security.services.UserDetailsImpl;
+import com.spirngauth.authentication_spring.services.UserDetailsImpl;
 
 // import io.jsonwebtoken.*;
 @Component

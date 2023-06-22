@@ -10,22 +10,25 @@ import com.spirngauth.authentication_spring.models.Categories;
 import com.spirngauth.authentication_spring.repository.CategoriesRepo;
 
 import org.springframework.ui.Model;
-
 @Controller
 @RequestMapping(value="/webportal")
 public class PageControl {
     @Autowired
     CategoriesRepo repo;
+
+    
     @GetMapping("")
     public String index(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model){
+        model.addAttribute("page","home");
         model.addAttribute("name", name);
-        model.addAttribute("catalogs",  repo.findAll());
-        
         return "page/page-content";
     }
 
     @GetMapping("categories")
+
     public String categories(Model model){
+
+        model.addAttribute("page","categories");
         return "page/categories";
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.spirngauth.authentication_spring.security.services.UserDetailsServiceImpl;
+import com.spirngauth.authentication_spring.services.UserDetailsServiceImpl;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {

@@ -61,7 +61,7 @@
                 <div class="side-menu-container">
                     <ul class="nav navbar-nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <a layout:href="@{/webportal}" class="nav-link active text-white">
+                            <a href="#" th:href="@{/}" th:classappend="${$page === 'home' ? 'active' : ''}" class="nav-link  text-white">
                                 <span>
                                     <i class="fa-solid fa-gauge mr-4"></i>
                                     Dashboard
@@ -70,8 +70,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" th:href="@{/webportal/categories}"
-                                class="nav-link  text-white">
+                            <a href="/page/categories.html" th:href="@{/webportal/categories}"
+                                class="nav-link  text-white" th:classappend="${$page === 'categories' ? 'active' : ''}">
                                 <span>
                                     <i class="fa-solid fa-list mr-4"></i>
                                     Categories

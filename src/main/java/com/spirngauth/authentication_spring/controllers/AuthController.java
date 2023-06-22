@@ -27,7 +27,7 @@ import com.spirngauth.authentication_spring.provider.CustomAuthenticationProvide
 import com.spirngauth.authentication_spring.repository.RoleRepository;
 import com.spirngauth.authentication_spring.repository.UserRepository;
 import com.spirngauth.authentication_spring.security.jwt.JwtUtils;
-import com.spirngauth.authentication_spring.security.services.UserDetailsImpl;
+import com.spirngauth.authentication_spring.services.UserDetailsImpl;
 
 import jakarta.validation.Valid;
 

@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.spirngauth.authentication_spring.security.services.UserDetailsServiceImpl;
+import com.spirngauth.authentication_spring.services.UserDetailsServiceImpl;
 
 import org.springframework.util.StringUtils;
 import jakarta.servlet.FilterChain;
