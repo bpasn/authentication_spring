@@ -19,7 +19,7 @@ docker/db/*
 *.iws
 *.iml
 *.ipr
-
+*.gz
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -35,4 +35,7 @@ build/
 docker/db/
 docker/db
 docker/db/*
+docker/mysql
+src/main/resources/storage
+
 .fake
