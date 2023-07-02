@@ -23,6 +23,7 @@ import com.spirngauth.authentication_spring.payload.request.LoginRequest;
 import com.spirngauth.authentication_spring.payload.request.SignupRequest;
 import com.spirngauth.authentication_spring.payload.response.JwtResponse;
 import com.spirngauth.authentication_spring.payload.response.MessageResponse;
+import com.spirngauth.authentication_spring.payload.response.ResPayload;
 import com.spirngauth.authentication_spring.provider.CustomAuthenticationProvider;
 import com.spirngauth.authentication_spring.repository.RoleRepository;
 import com.spirngauth.authentication_spring.repository.UserRepository;
@@ -31,6 +32,7 @@ import com.spirngauth.authentication_spring.services.UserDetailsImpl;
 
 import jakarta.validation.Valid;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,8 +71,17 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(
-                new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+        ResPayload response = new ResPayload();
+        HashMap<String,Object> map = new HashMap<>();
+
+        map.put("accessToken", jwt);
+        map.put("username", userDetails.getUsername());
+        map.put("email", userDetails.getEmail());
+        map.put("roles", roles);
+
+        response.setSuccess(true);
+        response.setPayload(map);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/signup")
