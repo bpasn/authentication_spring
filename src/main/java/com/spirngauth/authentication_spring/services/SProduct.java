@@ -57,7 +57,7 @@ public class SProduct implements IProduct {
             products = productRepo.products(Integer.parseInt(limit),Integer.parseInt(offset));
         }
         response.setSuccess(true);
-        map.put("products",products.toArray());
+        map.put("data",products.toArray());
         map.put("count",productRepo.count());
         response.setPayload(map);
         return response;
