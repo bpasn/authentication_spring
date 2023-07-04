@@ -17,6 +17,8 @@ import com.spirngauth.authentication_spring.repository.VariantsRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -46,16 +48,13 @@ public class SProduct implements IProduct {
     public static final String message = "Product Controller";
 
     @Override
-    public ResPayload getAllProduct(String limit, String offset) {
-        System.out.println(String.format("LIMIT : %s\nOFFSET :%s",limit,offset));
+    public ResPayload getAllProduct(int page, int pageSize) {
         ResPayload response = new ResPayload();
+
         HashMap<String,Object> map = new HashMap<>();
-        List<ProductRepo.FieldProductCate> products;
-        if(limit == null && offset == null){
-            products = productRepo.products();
-        }else{
-            products = productRepo.products(Integer.parseInt(limit),Integer.parseInt(offset));
-        }
+        PageRequest paging = PageRequest.of(page,pageSize);
+        List<ProductRepo.FieldProductCate> products = productRepo.products(paging.withPage(page));
+
         response.setSuccess(true);
         map.put("data",products.toArray());
         map.put("count",productRepo.count());

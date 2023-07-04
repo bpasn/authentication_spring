@@ -1,5 +1,6 @@
 package com.spirngauth.authentication_spring.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -39,22 +40,21 @@ public interface ProductRepo extends JpaRepository<Products, Long> {
             c.active
             FROM products p
             JOIN categories c on c.id = p.categories_id
-            limit :limit , :offset
              """,nativeQuery = true)
-    List<FieldProductCate> products(@Param("limit") Integer limit, @Param("offset") Integer offset);
+    List<FieldProductCate> products(Pageable pageable);
 
-    @Query(value = """
-            SELECT
-            p.id,
-            REPLACE(c.image_path,"src/main/resources/storage","") as image,
-            p.product_name as productName,
-            CONCAT( UPPER(SUBSTR(c.category_name,1,1)),SUBSTR(category_name,2)) as categoryName,
-            p.sku as Sku,
-            p.price,
-            p.quantity,
-            c.active
-            FROM products p
-            JOIN categories c on c.id = p.categories_id
-             """,nativeQuery = true)
-    List<FieldProductCate> products();
+//    @Query(value = """
+//            SELECT
+//            p.id,
+//            REPLACE(c.image_path,"src/main/resources/storage","") as image,
+//            p.product_name as productName,
+//            CONCAT( UPPER(SUBSTR(c.category_name,1,1)),SUBSTR(category_name,2)) as categoryName,
+//            p.sku as Sku,
+//            p.price,
+//            p.quantity,
+//            c.active
+//            FROM products p
+//            JOIN categories c on c.id = p.categories_id
+//             """,nativeQuery = true)
+//    List<FieldProductCate> products();
 }

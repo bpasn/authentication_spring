@@ -8,7 +8,7 @@ import com.spirngauth.authentication_spring.payload.response.BaseResponse;
 import com.spirngauth.authentication_spring.payload.response.ResPayload;
 
 public interface ICategories {
-    ResPayload getCategories();
+    ResPayload getCategories(int page,int size);
     BaseResponse createCategories(ReqCategory req) throws FileNotFoundException, IOException, Exception;
     BaseResponse response(Boolean flag);
     BaseResponse response(Boolean flag,String msg);

@@ -3,8 +3,13 @@ package com.spirngauth.authentication_spring.services;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.spirngauth.authentication_spring.utils.CreateImagesService;
@@ -29,10 +34,16 @@ public class SCategories implements ICategories {
     private static String msg = "Create Category Successfully !";
 
     @Override
-    public ResPayload getCategories() {
+    public ResPayload getCategories(int page, int pageSize) {
         ResPayload response = new ResPayload();
+        PageRequest paging = PageRequest.of(page,pageSize);
+        Page<Categories> pageResult = categoriesRepo.findAll(page > 1 ? paging.withPage(page) : paging);
+        HashMap<String,Object> map = new HashMap<>();
+
+        map.put("data",pageResult.get());
+        map.put("count",categoriesRepo.count());
         response.setSuccess(true);
-        response.setPayload(categoriesRepo.findAll());
+        response.setPayload(map);
         return response;
     }
 

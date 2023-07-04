@@ -74,7 +74,12 @@ logging:
     org:
       springframework:
         web: ERROR
-      hibernate: ERROR
+      hibernate: 
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+             BasicBinder: TRACE
     com:
       howtodoinjava: INFO
       demo:

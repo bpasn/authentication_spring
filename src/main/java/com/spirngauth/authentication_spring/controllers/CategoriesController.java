@@ -6,11 +6,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.spirngauth.authentication_spring.models.ErrorResponse;
 import com.spirngauth.authentication_spring.payload.request.categories.ReqCategory;
@@ -28,8 +24,8 @@ public class CategoriesController {
     private SCategories sCagetories;
 
     @GetMapping("get-all")
-    public ResponseEntity<ResPayload> getAllCategories(){
-        return ResponseEntity.ok(sCagetories.getCategories());
+    public ResponseEntity<ResPayload> getAllCategories(@RequestParam(required = false,name = "page") int page, @RequestParam(required = false,name = "pageSize") int pageSize){
+        return ResponseEntity.ok(sCagetories.getCategories(page,pageSize));
     }
     // , consumes = "multipart/form-data",produces = {"application/json"}
     @PostMapping(value = "create")

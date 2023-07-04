@@ -35,8 +35,8 @@ public class ProductController {
     }
 
     @GetMapping("get-all")
-    public ResponseEntity<ResPayload> getProduct(@RequestParam(required = false,name = "limit") String limit,@RequestParam(required = false,name = "offset") String offset) {
-        return ResponseEntity.ok(sProduct.getAllProduct(limit,offset));
+    public ResponseEntity<ResPayload> getProduct(@RequestParam(required = false,name = "page") int page,@RequestParam(required = false,name = "pageSize") int pageSize) {
+        return ResponseEntity.ok(sProduct.getAllProduct(page,pageSize));
     }
 
 }
